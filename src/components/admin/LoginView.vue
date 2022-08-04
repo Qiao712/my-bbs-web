@@ -6,13 +6,13 @@
 
         <el-form :model="form" label-width="60px">
           <el-form-item label="用户名">
-            <el-input v-model="username" placeholder="请输入用户名" name="username"></el-input>
+            <el-input v-model="credential.username" placeholder="请输入用户名" name="username"></el-input>
           </el-form-item>
           <el-form-item label="密码">
-            <el-input v-model="password" type="password" placeholder="请输入密码" name="password"></el-input>
+            <el-input v-model="credential.password" type="password" placeholder="请输入密码" name="password"></el-input>
           </el-form-item>
           <el-form-item>
-            <el-checkbox v-model="rememberMe" name="remember-me">记住我</el-checkbox>
+            <el-checkbox v-model="credential.rememberMe" name="remember-me">记住我</el-checkbox>
           </el-form-item>
           <el-form-item>
             <el-button type="primary" @click="login">登录</el-button>
@@ -25,19 +25,50 @@
 </template>
 
 <script>
+import userApi from "../../api/userApi"
+import { ElMessage } from 'element-plus'
+
 export default {
-  name: 'Login',
+  name: 'LoginView',
   data(){
     return {
       msg : "",
-      username : "",
-      password : "",
-      rememberMe : false
+      credential: {
+        username : "",
+        password : "",
+        rememberMe : false
+      }
     }
   },
   methods:{
     login(){
-      
+      userApi.login(this.credential).then(
+        (response) => {
+          //储存token
+          let token = response.data
+
+          //清除原有Token
+          localStorage.removeItem("Token")
+          sessionStorage.removeItem("Token")
+          
+          if(this.credential.rememberMe){
+            //如果选择了rememberMe则储存在本地储存中
+            localStorage.setItem("Token", token)
+          }else{
+            //否则在会话储存中
+            sessionStorage.setItem("Token", token)
+          }
+          
+
+          ElMessage({
+            message: "登录成功",
+            type: 'success',
+            duration: 2000,
+          })
+
+          this.$router.push({path: "/admin"})
+        }
+      )
     }
   }
 }
