@@ -42,14 +42,14 @@ export default {
   },
   methods:{
     login(){
+      //清除原有Token
+      localStorage.removeItem("Token")
+      sessionStorage.removeItem("Token")
+
       userApi.login(this.credential).then(
         (response) => {
           //储存token
           let token = response.data
-
-          //清除原有Token
-          localStorage.removeItem("Token")
-          sessionStorage.removeItem("Token")
           
           if(this.credential.rememberMe){
             //如果选择了rememberMe则储存在本地储存中

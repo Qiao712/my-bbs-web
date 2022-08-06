@@ -24,7 +24,7 @@
         
         <el-table-column label="头像">
           <template #default="scope">
-            <img :src="getAvatarUrl(scope.$index)" class="user-avatar">
+            <el-avatar :size="32" :src="getAvatarUrl(scope.$index)" />
           </template>
         </el-table-column>
 
@@ -106,8 +106,6 @@ export default {
             user.createTime = (new Date(user.createTime)).toDateString()
             user.updateTime = (new Date(user.updateTime)).toDateString()
           })
-
-          console.log("get users", response.data)
         }
       )
     },
@@ -133,8 +131,7 @@ export default {
     },
 
     getAvatarUrl(index){
-      index
-      return "https://picsum.photos/200/300"
+      return this.users[index].avatarUrl ? this.users[index].avatarUrl : "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
     },
 
     editUser(index){
@@ -150,12 +147,6 @@ export default {
 </script>
 
 <style scoped>
-.user-avatar{
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-}
-
 .user-query-form{
   margin-left: 10px;
   margin-top: 10px;

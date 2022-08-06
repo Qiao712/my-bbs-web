@@ -38,9 +38,9 @@ export default{
     })
   },
 
-  setUserAvatar(form){
+  setUserAvatar(userId, form){
     return request({
-      url: "/users/avatar",
+      url: "/users/" + userId + "/avatar",
       method: "POST",
       data: form
     })
