@@ -6,10 +6,12 @@ import LoginView from "../components/admin/LoginView"
 import Users from "../components/admin/Users"
 import Roles from "../components/admin/Roles"
 import UserEdit from "../components/admin/UserEdit"
+import PostEdit from "../components/post/PostEdit"
 
 let routes = [
     { path: '/', component: IndexView},
     { path: '/register', component: Register},
+    { path: '/post', component: PostEdit},
 
     //后台管理
     { path: '/admin/login', component: LoginView},
