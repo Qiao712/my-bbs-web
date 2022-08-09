@@ -18,5 +18,12 @@ export default{
         method: "POST",
         data: post
       })
+    },
+
+    getPost(postId){
+      return request({
+        url: "/posts/" + postId,
+        method: "GET"
+      })
     }
   }

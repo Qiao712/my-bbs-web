@@ -1,14 +1,7 @@
 <template>
-  <!--板块选择 标题 发布选项-->
-  <el-form :inline="true">
-    <el-form-item label="标题" style="width: 90%" >
-      <el-input v-model="post.title" placeholder="请输入标题"/>
-    </el-form-item>
-
-    <el-form-item style="width: 5%">
-      <el-button type="primary" @click="publishPost()">发布</el-button>
-    </el-form-item>
-  </el-form>
+  <div>
+    <el-button type="primary" style="margin: 10px" @click="publishComment()">回复</el-button>
+  </div>
 
   <div style="border: 1px solid #ccc">
     <Toolbar
@@ -18,15 +11,13 @@
       :mode="mode"
     />
     <Editor
-      style="height: 500px; overflow-y: hidden;"
+      style="height: 40vh; min-height: 200px; overflow-y: hidden;"
       v-model="valueHtml"
       :defaultConfig="editorConfig"
       :mode="mode"
       @onCreated="handleCreated"
     />
   </div>
-
-  <!-- post:{{post}} -->
 </template>
 
 <script>
@@ -36,11 +27,16 @@ import { onBeforeUnmount, ref, shallowRef } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { ElMessage } from 'element-plus'
 
+import commentApi from "../../api/commentApi"
 import postApi from "../../api/postApi"
 
 export default {
   components: { Editor, Toolbar },
-  setup() {
+  props: [
+    "post",         //被回复的贴子
+    "listComments"  //用于刷新回复列表
+  ],  
+  setup(props) {
     // 编辑器实例，必须用shallowRef
     const editorRef = shallowRef()
     // 内容 HTML
@@ -64,11 +60,6 @@ export default {
           allowedFileTypes: ['image/*'],
           // 将 meta 拼接到 url 参数中
           metaWithUrl: false,
-          // http header
-          // headers: {
-          //   Accept: 'text/x-json',
-          //   otherKey: 'xxx'
-          // },
           // 跨域是否传递 cookie ，默认为 false
           withCredentials: true,
           // 超时时间
@@ -94,9 +85,9 @@ export default {
 
     // 组件销毁时，也及时销毁编辑器
     onBeforeUnmount(() => {
-        const editor = editorRef.value
-        if (editor == null) return
-        editor.destroy()
+      const editor = editorRef.value
+      if (editor == null) return
+      editor.destroy()
     })
 
     const handleCreated = (editor) => {
@@ -104,16 +95,19 @@ export default {
       editorRef.value = editor
     }
 
-    const post = ref({
-      title: "",
-      forumId: 1,
-      content: valueHtml
-    })
+    //评论
+    const publishComment = () => {
+      let comment = {
+        postId: props.post.id,
+        content: valueHtml.value
+      }
 
-    //发布贴子
-    const publishPost = () => {
-      postApi.addPost(post.value).then(
-        ()=>ElMessage.success("发布成功")
+      commentApi.addComment(comment).then(
+        ()=>{
+          valueHtml.value = ""
+          ElMessage.success("发布成功")
+          props.listComments()
+        }
       )
     }
 
@@ -125,8 +119,7 @@ export default {
       editorConfig,
       handleCreated,
 
-      post,
-      publishPost
+      publishComment
     };
   }
 }
