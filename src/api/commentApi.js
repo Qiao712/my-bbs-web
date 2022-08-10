@@ -15,5 +15,12 @@ export default{
       method: "GET",
       params
     })
+  },
+
+  deleteComment(commentId){
+    return request({
+      url: "/comments/" + commentId,
+      method: "DELETE",
+    })
   }
 }

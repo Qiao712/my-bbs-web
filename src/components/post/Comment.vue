@@ -15,7 +15,7 @@
       <!--子回复-->
       <div v-if="subComments.length > 0" class="sub-comment-box">
         <!--子回复1-->
-        <SubComment v-for="subComment in subComments" :key="subComment.id" :comment="subComment" :callback="listSubComments"/>
+        <SubComment v-for="subComment in subComments" :key="subComment.id" :comment="subComment" :refresh="listSubComments"/>
         <!--分页-->
         <el-pagination
           :current-page="pageNo"
@@ -34,7 +34,7 @@
         <span class="small-text">{{comment.createTime}}</span>
         <span class="small-text" style="color: blue">举报</span>
         <span class="small-text" style="color: blue" @click="replyDialogVisible = true">回复</span>
-        <!-- <span class="small-text" style="color: blue" @click="deleteComment">删除</span> -->
+        <span class="small-text" style="color: blue" @click="deleteComment">删除</span>
       </div>
     </div>
   </div>
@@ -55,7 +55,8 @@ export default {
   name: "Comment",
   props: [
     "comment",  
-    "no"        //"楼层数"
+    "no",        //"楼层数"
+    "refresh"    //用于刷新列表的回调函数
   ],
 
   components:{
@@ -122,10 +123,19 @@ export default {
 
       commentApi.addComment(comment).then(
         ()=>{
-          this.replyDialogVisible = true
+          this.replyDialogVisible = false
           this.replyContent = ""
           ElMessage.success("发布成功")
           this.listSubComments()
+        }
+      )
+    },
+
+    deleteComment(){
+      commentApi.deleteComment(this.comment.id).then(
+        ()=>{
+          ElMessage.success("删除成功")
+          if(this.refresh) this.refresh()
         }
       )
     }

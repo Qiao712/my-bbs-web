@@ -33,5 +33,12 @@ export default{
       method: "GET",
       params
     })
+  },
+
+  removePost(postId){
+    return request({
+      url: "/posts/" + postId,
+      method: "DELETE"
+    })
   }
-  }
+}

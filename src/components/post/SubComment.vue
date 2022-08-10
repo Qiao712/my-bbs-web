@@ -40,7 +40,7 @@ export default {
   name: "SubComment",
   props: [
     "comment",
-    "callback"
+    "refresh"
   ],
   data(){
     return {
@@ -61,9 +61,9 @@ export default {
 
       commentApi.addComment(comment).then(
         ()=>{
-          this.replyDialogVisible = true
+          this.replyDialogVisible = false
           this.replyContent = ""
-          if(this.callback) this.callback()
+          if(this.refresh) this.refresh()
           ElMessage.success("回复成功")
         }
       )

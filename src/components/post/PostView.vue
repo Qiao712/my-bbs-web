@@ -19,6 +19,7 @@
       <Comment 
         :comment="comment"
         :no="2 + index + (pageNo - 1) * pageSize"
+        :refresh="listComments"
       />
     </el-col>
   </el-row>

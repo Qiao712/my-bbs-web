@@ -61,7 +61,7 @@ export default {
 
       travel(content)
       this.contentText = contentText
-    }
+    },
   }
 }
 </script>

@@ -17,8 +17,7 @@
         <span class="small-text">1楼</span>
         <span class="small-text">{{post.createTime}}</span>
         <span class="small-text" style="color: blue">举报</span>
-        <!-- <span class="small-text" style="color: blue">回复</span> -->
-        <span class="small-text" style="color: blue">删除</span>
+        <span class="small-text" style="color: blue" @click="removePost">删除</span>
       </div>
     </div>
   </div>
@@ -26,9 +25,22 @@
 </template>
 
 <script>
+import { ElMessage } from 'element-plus/lib/components'
+import postApi from '../../api/postApi'
 export default {
   name: "ReplyView",
   props: ["post"],
+
+  methods:{
+    removePost(){
+      postApi.removePost(this.post.id).then(
+        ()=>{
+          ElMessage.success("删除成功")
+          this.$router.push({path: "/forum/" + this.post.forumId})
+        }
+      )
+    }
+  }
 }
 </script>
 
