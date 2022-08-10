@@ -1,14 +1,20 @@
 <template>
   <!--板块选择 标题 发布选项-->
-  <el-form :inline="true">
-    <el-form-item label="标题" style="width: 90%" >
-      <el-input v-model="post.title" placeholder="请输入标题"/>
-    </el-form-item>
+  <div class="title">
+    <div>
+      <el-form-item label="标题">
+        <el-input v-model="post.title" placeholder="请输入标题"/>
+      </el-form-item>
+    </div>
 
-    <el-form-item style="width: 5%">
-      <el-button type="primary" @click="publishPost()">发布</el-button>
-    </el-form-item>
-  </el-form>
+    <div></div>
+
+    <div>
+      <el-form-item>
+        <el-button type="primary" @click="publishPost()">发布</el-button>
+      </el-form-item>
+    </div>
+  </div>
 
   <div style="border: 1px solid #ccc">
     <Toolbar
@@ -25,8 +31,6 @@
       @onCreated="handleCreated"
     />
   </div>
-
-  <!-- post:{{post}} -->
 </template>
 
 <script>
@@ -39,8 +43,11 @@ import { ElMessage } from 'element-plus'
 import postApi from "../../api/postApi"
 
 export default {
+  name: "PostEdit",
   components: { Editor, Toolbar },
-  setup() {
+  props: ["forumId"],
+
+  setup(props) {
     // 编辑器实例，必须用shallowRef
     const editorRef = shallowRef()
     // 内容 HTML
@@ -106,14 +113,18 @@ export default {
 
     const post = ref({
       title: "",
-      forumId: 1,
+      forumId: props.forumId,
       content: valueHtml
     })
 
     //发布贴子
     const publishPost = () => {
       postApi.addPost(post.value).then(
-        ()=>ElMessage.success("发布成功")
+        ()=>{
+          post.value.title = ""
+          post.value.content = ""
+          ElMessage.success("发布成功")
+        }
       )
     }
 
@@ -132,6 +143,9 @@ export default {
 }
 </script>
 
-<style>
-
+<style scoped>
+.title{
+  display: grid;
+  grid-template-columns: 85% 5% 10%;
+}
 </style>

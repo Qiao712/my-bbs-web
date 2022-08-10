@@ -8,13 +8,14 @@ import Roles from "../components/admin/Roles"
 import UserEdit from "../components/admin/UserEdit"
 import PostEdit from "../components/post/PostEdit"
 import PostView from "../components/post/PostView"
-import CommentEdit from "../components/post/CommentEdit"
+import ForumView from "../components/forum/ForumView"
 
 let routes = [
+  //用户端
   { path: '/', component: IndexView},
   { path: '/register', component: Register},
+  { path: '/forum/:forumId', component: ForumView},
   { path: '/post/edit', component: PostEdit},
-  { path: '/post/comment/edit', component: CommentEdit},
   { path: '/post/:postId', component: PostView},
 
   //后台管理

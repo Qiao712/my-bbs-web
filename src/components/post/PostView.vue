@@ -132,13 +132,13 @@ export default {
 #post-content{
   border: 1px solid var(--el-border-color);
   border-radius: 2px;
-  margin-top: 0.5rem;
+  margin-top: 5px;
 }
 
 .reply-col{
   border: 1px solid var(--el-border-color);
   border-radius: 0;
-  margin-top: 0.5rem;
+  margin-top: 5px;
   min-height: 10vh;
 }
 

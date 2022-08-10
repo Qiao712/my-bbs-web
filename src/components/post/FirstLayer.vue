@@ -29,10 +29,6 @@
 export default {
   name: "ReplyView",
   props: ["post"],
-
-  methods:{
-    
-  }
 }
 </script>
 
