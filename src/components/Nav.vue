@@ -13,7 +13,6 @@ export default {
 
 <style scoped>
 .nav{
-  background-color:aquamarine;
   display:flex;
   align-items:center;
 }

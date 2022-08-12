@@ -9,6 +9,7 @@ import UserEdit from "../components/admin/UserEdit"
 import PostEdit from "../components/post/PostEdit"
 import PostView from "../components/post/PostView"
 import ForumView from "../components/forum/ForumView"
+import Forums from "../components/admin/Forums"
 
 let routes = [
   //用户端
@@ -27,6 +28,7 @@ let routes = [
       { path: 'users', component: Users},
       { path: 'users/:userId/edit', component: UserEdit},
       { path: 'roles', component: Roles},
+      { path: 'forum', component: Forums}
     ]
   }
 ];

@@ -1,7 +1,7 @@
 <template>
-  <div class="user-managmement">
+  <div class="container">
     <!-- 搜索选项 -->
-    <div class="user-query-form">
+    <div class="head">
       <el-form :inline="true">
         <el-form-item label="用户名">
           <el-input v-model="queryForm.username"/>
@@ -18,9 +18,9 @@
     </div>
 
     <!--用户列表-->
-    <div>
+    <div class="main">
       <el-table :data="users">
-        <el-table-column fixed prop="username" label="用户名"/>
+        <el-table-column prop="username" label="用户名"/>
         
         <el-table-column label="头像">
           <template #default="scope">
@@ -34,7 +34,7 @@
 
         <el-table-column prop="createTime" label="创建时间"/>
 
-        <el-table-column fixed="right" label="操作">
+        <el-table-column label="操作">
           <template #default="scope">
             <el-button link type="primary" size="small" @click.prevent="removeUser(scope.$index)">删除</el-button>
             <el-button link type="primary" size="small" @click.prevent="editUser(scope.$index)">编辑</el-button>
@@ -44,7 +44,7 @@
     </div>
 
     <!--分页-->
-    <div>
+    <div class="foot">
       <el-pagination
         :current-page="query.pageNo"
         :page-size="query.pageSize"
@@ -52,7 +52,6 @@
         :pager-count="8"
         @current-change="handlePageChange"
         layout="prev, pager, next"
-        style="background-color: white;"
       />
     </div>
   </div>
@@ -83,14 +82,23 @@ export default {
 
       users:[],
       total: 0,
+      tableHeight: 0,
 
-      roles:[]
+      roles:[],
     }
   },
 
   created(){
     this.getUsers()
     this.getRoles()
+  },
+
+  mounted(){
+    window.onresize = () => {
+      let headHeight = this.$refs.table.$el.offsetTop
+      let footHeight = this.$refs.foot.clientHeight
+      this.tableHeight = window.innerHeight - headHeight - footHeight
+    }
   },
 
   methods:{
@@ -147,8 +155,17 @@ export default {
 </script>
 
 <style scoped>
-.user-query-form{
-  margin-left: 10px;
-  margin-top: 10px;
+.container{
+  display: grid;
+  height: 100%;
+  grid-template-rows: 50px auto 40px;
+}
+
+.el-form{
+  margin: 10px;
+}
+
+.main{
+  overflow: auto;
 }
 </style>
