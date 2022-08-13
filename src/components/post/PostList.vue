@@ -2,6 +2,8 @@
   <div class="post-preview" v-for="post in posts" :key="post.id" @click="viewPost(post.id)">
     <PostPreview :post="post"></PostPreview>
   </div>
+
+  <el-empty description="无贴子" v-if="!posts || posts.length == 0"/>
 </template>
 
 <script>

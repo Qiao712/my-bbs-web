@@ -12,8 +12,8 @@
       <div class="sub-comment-content">
         <span class="small-text">
           {{comment.author.username}}
-          <span v-if="comment.repliedId != comment.parentId">回复 <span style="color: pink">{{comment.repliedUserName}}</span></span>
-          :{{comment.content}}
+          <span v-if="comment.repliedId != comment.parentId">回复 <span style="color: pink">{{comment.repliedUserName}}</span></span>:
+          {{comment.content}}
         </span>
       </div>
 
@@ -88,6 +88,8 @@ export default {
   color: var(--el-text-color-regular);
   font-size: 15px;
   margin: 5px;
+  word-wrap:break-word;
+  word-break:break-word;
 }
 
 .avatar{

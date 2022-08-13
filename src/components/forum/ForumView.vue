@@ -1,7 +1,8 @@
 <template>
   <!--论坛标题-->
   <el-row justify="center" v-if="forum">
-    <el-col :xs="24" :sm="24" :md="20" :lg="16" :xl="12">
+    <el-col class="forum-bar" :xs="24" :sm="24" :md="20" :lg="16" :xl="12">
+      <el-avatar :size="80" style="margin: 10px" :src="forum.logoUrl" />
       <div class="title-font">{{forum.name}}</div>
     </el-col>
   </el-row>
@@ -109,5 +110,11 @@ export default {
 <style scoped>
 .title-font{
   font-size: 20px
+}
+
+.forum-bar{
+  height: 100px;
+  display:flex;
+	align-items:center;
 }
 </style>

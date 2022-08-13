@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import Nav from '../Nav.vue'
+import Nav from './Nav'
 import Menu from "./Menu"
 
 export default {

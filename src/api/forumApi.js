@@ -16,6 +16,13 @@ export default{
     })
   },
 
+  listAllForums(){
+    return request({
+      url: "/forums/all",
+      method: "GET"
+    })
+  },
+
   addForum(forum){
     return request({
       url: "/forums",
