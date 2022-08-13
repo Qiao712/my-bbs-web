@@ -40,5 +40,19 @@ export default{
       url: "/posts/" + postId,
       method: "DELETE"
     })
+  },
+
+  likePost(postId){
+    return request({
+      url: "/posts/" + postId + "/like",
+      method: "GET"
+    })
+  },
+
+  undoLikePost(postId){
+    return request({
+      url: "/posts/" + postId + "/undo-like",
+      method: "GET"
+    })
   }
 }

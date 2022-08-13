@@ -14,8 +14,12 @@
 
       <!--按钮条-->
       <div class="bottom-bar">
+        <el-button type="primary" @click="likePost"     plain v-if="!liked">赞 {{likeCount}}</el-button>
+        <el-button type="primary" @click="undoLikePost" v-if="liked">已赞 {{likeCount}}</el-button>
+
         <span class="small-text">1楼</span>
         <span class="small-text">{{post.createTime}}</span>
+        
         <span class="small-text" style="color: blue">举报</span>
         <span class="small-text" style="color: blue" @click="removePost">删除</span>
       </div>
@@ -31,12 +35,40 @@ export default {
   name: "ReplyView",
   props: ["post"],
 
+  data(){
+    return {
+      likeCount: this.post.likeCount,
+      liked: this.post.liked
+    }
+  },
+
   methods:{
     removePost(){
       postApi.removePost(this.post.id).then(
         ()=>{
           ElMessage.success("删除成功")
           this.$router.push({path: "/forum/" + this.post.forumId})
+        }
+      )
+    },
+
+    likePost(){
+      postApi.likePost(this.post.id).then(
+        ()=>{
+          this.liked = true
+          this.likeCount++
+          ElMessage.success("点赞成功")
+        }
+      )
+    },
+
+    undoLikePost(){
+      console.log("undo like")
+      postApi.undoLikePost(this.post.id).then(
+        ()=>{
+          this.liked = false
+          this.likeCount--
+          ElMessage.success("取消点赞成功")
         }
       )
     }
