@@ -22,6 +22,13 @@
     <div class="main">
       <el-table :data="forums">
         <el-table-column prop="name" label="板块名"/>
+        
+        <el-table-column label="Logo">
+          <template #default="scope">
+            <el-avatar :size="32" :src="getLogoUrl(scope.$index)" />
+          </template>
+        </el-table-column>
+        
         <el-table-column prop="category" label="分类名"/>
         <el-table-column prop="description" label="描述"/>
         <el-table-column prop="createTime" label="创建时间"/>
@@ -164,6 +171,9 @@ export default {
       this.listForums()
     },
 
+    getLogoUrl(index){
+      return this.forums[index].logoUrl
+    }
   }
 }
 </script>

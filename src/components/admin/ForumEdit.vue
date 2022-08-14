@@ -1,5 +1,9 @@
 <template>
   <el-form label-width="100px">
+    <el-form-item label="Logo">
+      <ForumLogoUploader :forumId="forum.id" :logoUrl="forum.logoUrl" :refresh="refresh"/>
+    </el-form-item>
+
     <el-form-item label="板块名">
       <el-input v-model="forum.name"/>
     </el-form-item>
@@ -21,10 +25,16 @@
 </template>
 
 <script>
+import ForumLogoUploader from './ForumLogoUploader'
 import { ElMessage } from 'element-plus/lib/components'
 import forumApi from "../../api/forumApi"
+
 export default {
   name: "ForumEdit",
+
+  components: {
+    ForumLogoUploader
+  },
 
   props:[
     "originForum",
@@ -37,7 +47,8 @@ export default {
         id: null,
         name: "",
         category: "",
-        description: ""
+        description: "",
+        logoUrl: null,
       },
 
       categories: []
@@ -52,6 +63,7 @@ export default {
         this.forum.name = this.originForum.name
         this.forum.category = this.originForum.category
         this.forum.description = this.originForum.description
+        this.forum.logoUrl = this.originForum.logoUrl
       },
       { immediate: true }
     )

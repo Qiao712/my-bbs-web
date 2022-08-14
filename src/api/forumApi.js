@@ -51,5 +51,13 @@ export default{
       url: "/forums/categories",
       method: "GET"
     })
+  },
+
+  setForumLogo(forumId, formData){
+    return request({
+      url: "/forums/" + forumId + "/logo",
+      method: "PUT",
+      data: formData
+    })
   }
 }
