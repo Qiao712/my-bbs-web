@@ -10,6 +10,13 @@ import PostEdit from "../components/post/PostEdit"
 import PostView from "../components/post/PostView"
 import ForumView from "../components/forum/ForumView"
 import Forums from "../components/admin/Forums"
+import UserSpace from "../components/user/UserSpace"
+import PostsOfUser from "../components/user/PostsOfUser"
+import CommentsOfUser from "../components/user/CommentsOfUser"
+import FavoriteList from "../components/user/FavoriteList"
+import FollowingList from "../components/user/FollowingList"
+
+import TestEdit from "../components/post/TestEdit"
 
 let routes = [
   //用户端
@@ -18,6 +25,15 @@ let routes = [
   { path: '/forum/:forumId', component: ForumView},
   { path: '/post/edit', component: PostEdit},
   { path: '/post/:postId', component: PostView},
+  { path: '/user', component: UserSpace,
+    children:
+    [
+      { path: ":userId/posts", component: PostsOfUser, props: true},
+      { path: ":userId/comments", component: CommentsOfUser, props: true},
+      { path: ":userId/favorites", component: FavoriteList, props: true},
+      { path: ":userId/following", component: FollowingList, props: true}
+    ]
+  },
 
   //后台管理
   { path: '/admin/login', component: LoginView},
@@ -30,7 +46,9 @@ let routes = [
       { path: 'roles', component: Roles},
       { path: 'forum', component: Forums}
     ]
-  }
+  },
+
+  { path: '/test-edit', component: TestEdit}
 ];
 
 let router = createRouter({

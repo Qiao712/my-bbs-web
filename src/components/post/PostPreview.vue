@@ -20,6 +20,8 @@
 </template>
 
 <script>
+import htmlUtil from "../../util/htmlUtil"
+
 export default {
   name: "PostPreview",
   props: ["post"],
@@ -39,28 +41,9 @@ export default {
   },
   
   methods:{
-    //遍历内容DOM的所有节点，记录其中文本(TEXT_NODE)
     getPostContentPreview(){
-      if(! this.post) return ""
-      
-      let domparser = new DOMParser()
-      let content = domparser.parseFromString(this.post.content, "text/html")
-      let contentText = ""
-
-      let travel = (node)=>{
-        if(node.nodeType == 3){
-          //若为TEXT_NODE节点
-          contentText += node.nodeValue + " "
-          return
-        }
-
-        node.childNodes.forEach(childNode => {
-          travel(childNode)
-        })
-      }
-
-      travel(content)
-      this.contentText = contentText
+      if(! this.post) return
+      this.contentText = htmlUtil.getTextFromHtml(this.post.content)
     },
   }
 }

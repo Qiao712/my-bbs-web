@@ -17,6 +17,14 @@ export default{
     })
   },
 
+  listCommentsByAuthor(params){
+    return request({
+      url: "/comments/my",
+      method: "GET",
+      params
+    })
+  },
+
   deleteComment(commentId){
     return request({
       url: "/comments/" + commentId,

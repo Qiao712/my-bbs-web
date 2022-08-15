@@ -26,6 +26,7 @@
 
 <script>
 import userApi from "../../api/userApi"
+import store from "../../store"
 import { ElMessage } from 'element-plus'
 
 export default {
@@ -50,7 +51,6 @@ export default {
         (response) => {
           //储存token
           let token = response.data
-          
           if(this.credential.rememberMe){
             //如果选择了rememberMe则储存在本地储存中
             localStorage.setItem("Token", token)
@@ -58,7 +58,13 @@ export default {
             //否则在会话储存中
             sessionStorage.setItem("Token", token)
           }
-          
+
+          //获取用户数据
+          userApi.getCurrentUser().then(
+            response => {
+              store.setCurrentUser(response.data)
+            }
+          )
 
           ElMessage({
             message: "登录成功",

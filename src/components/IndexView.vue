@@ -8,10 +8,11 @@
 
 <script>
 import ForumList from "./post/ForumList.vue"
+
 export default {
   name: "IndexView",
   components: {
-    ForumList
+    ForumList,
   }
 }
 </script>
