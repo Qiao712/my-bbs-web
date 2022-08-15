@@ -9,7 +9,7 @@
 
     <div class="post-content">
       <!--贴子内容-->
-      <div class="editor-content-view" v-html="post.content">
+      <div class="editor-content-view" v-html="cleanPostContent">
       </div>
 
       <!--按钮条-->
@@ -31,6 +31,8 @@
 <script>
 import { ElMessage } from 'element-plus/lib/components'
 import postApi from '../../api/postApi'
+import htmlUtil from '../../util/htmlUtil'
+
 export default {
   name: "ReplyView",
   props: ["post"],
@@ -38,8 +40,15 @@ export default {
   data(){
     return {
       likeCount: this.post.likeCount,
-      liked: this.post.liked
+      liked: this.post.liked,
+
+      //检查过滤后的HTML(防止Xss, 去除不允许的标签,属性)
+      cleanPostContent: ""
     }
+  },
+
+  created(){
+    this.cleanPostContent = htmlUtil.purifyHtml(this.post.content)
   },
 
   methods:{
@@ -63,7 +72,6 @@ export default {
     },
 
     undoLikePost(){
-      console.log("undo like")
       postApi.undoLikePost(this.post.id).then(
         ()=>{
           this.liked = false

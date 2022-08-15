@@ -15,16 +15,29 @@
     />
   </div>
 
-  {{valueHtml}}
+  编辑器输出的HTML:
+  <el-input v-model="valueHtml"/>
+
+  <div>
+    <el-button @click="purifyHtml">Purify</el-button>
+  </div>
+  
+  过滤后的HTML:
+  {{cleanValueHtml}}
+
+  <br/>
+  展示过滤后的HTML:
+  <div v-html="cleanValueHtml"></div>
 </template>
 
 <script>
 import '@wangeditor/editor/dist/css/style.css' // 引入 css
 
-import { onBeforeUnmount, ref, shallowRef } from 'vue'
+import { onBeforeUnmount, ref, shallowRef} from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 
 import postApi from "../../api/postApi"
+import htmlUtil from '../../util/htmlUtil'
 
 export default {
   name: "TestEdit",
@@ -36,6 +49,12 @@ export default {
     
     // 内容 HTML
     const valueHtml = ref("<button href=\"javascript:window.alert('hello')\">hello</button>")
+    
+    //过滤后的html
+    const cleanValueHtml = ref()
+    const purifyHtml = ()=>{
+      cleanValueHtml.value = htmlUtil.purifyHtml(valueHtml.value)
+    }
     
     //工具栏配置
     const toolbarConfig = {
@@ -112,10 +131,13 @@ export default {
     return {
       editorRef,
       valueHtml,
+      cleanValueHtml,
       mode: 'default',
       toolbarConfig,
       editorConfig,
-      handleCreated
+      handleCreated,
+
+      purifyHtml
     };
   }
 }

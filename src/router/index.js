@@ -16,7 +16,8 @@ import CommentsOfUser from "../components/user/CommentsOfUser"
 import FavoriteList from "../components/user/FavoriteList"
 import FollowingList from "../components/user/FollowingList"
 
-import TestEdit from "../components/post/TestEdit"
+import TestEdit from "../components/test/TestEdit"
+import TestDOMPurify from "../components/test/TestDOMPurify"
 
 let routes = [
   //用户端
@@ -48,7 +49,8 @@ let routes = [
     ]
   },
 
-  { path: '/test-edit', component: TestEdit}
+  { path: '/test-edit', component: TestEdit},
+  { path: '/test-dompurify', component: TestDOMPurify}
 ];
 
 let router = createRouter({

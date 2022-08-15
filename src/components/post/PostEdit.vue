@@ -50,10 +50,19 @@ export default {
   setup(props) {
     // 编辑器实例，必须用shallowRef
     const editorRef = shallowRef()
+    
     // 内容 HTML
     const valueHtml = ref('')
+    
     //工具栏配置
-    const toolbarConfig = {}
+    const toolbarConfig = {
+      //设置显示的按钮
+      toolbarKeys: ["headerSelect", "bold", "underline", "italic", "through", "code", "clearStyle", "|", 
+        "indent", "delIndent", "|",
+        "bulletedList", "uploadImage", "insertImage", "divider", "emotion", "insertLink", "codeBlock", "blockquote", "|",
+        "undo", "redo"]
+    }
+
     // 编辑器配置
     const editorConfig = { 
       placeholder: '请输入内容...',

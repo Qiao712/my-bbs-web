@@ -50,6 +50,7 @@
 import commentApi from "../../api/commentApi"
 import SubComment from "./SubComment"
 import { ElMessage } from 'element-plus'
+import htmlUtil from '../../util/htmlUtil'
 
 export default {
   name: "Comment",
@@ -72,14 +73,22 @@ export default {
 
       //回复弹窗
       replyDialogVisible: false,
-      replyContent: ""
+      replyContent: "",
+
+      //检查过滤后的HTML(防止Xss, 去除不允许的标签,属性)
+      cleanCommentContent: ""
     }
   },
 
   created(){
     this.$watch(
       () => this.comment,
-      () => this.listSubComments(),
+      () => {
+        this.listSubComments()
+        
+        //过滤内容html
+        this.cleanCommentContent = htmlUtil.purifyHtml(this.comment.content)
+      },
       { immediate: true }
     )
   },
