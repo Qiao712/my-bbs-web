@@ -1,6 +1,6 @@
 <template>
   <div class="post-preview" v-for="post in posts" :key="post.id" @click="viewPost(post.id)">
-    <PostPreview :post="post"></PostPreview>
+    <PostPreview :post="post" :highlight="highlight"></PostPreview>
   </div>
 
   <el-empty description="无贴子" v-if="!posts || posts.length == 0"/>
@@ -11,7 +11,10 @@ import PostPreview from "./PostPreview.vue"
 
 export default {
   name: "PostList",
-  props: ["posts"],
+  props: [
+    "posts",
+    "highlight" //是否启用高亮显示(<em>标签)，用于展示贴子搜索结果
+  ],
 
   components: {
     PostPreview

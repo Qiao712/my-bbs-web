@@ -5,7 +5,7 @@
     </div> 
 
     <!--搜索框-->
-    <el-input class="search-bar" placeholder="搜索贴子..."/>
+    <el-input class="search-bar" v-model="searchText" placeholder="搜索贴子..." @keypress.enter="searchPosts()"/>
 
     <div class="flex-grow"/>
 
@@ -45,9 +45,16 @@ export default {
 
   data(){
     return{
-      state: store.state
+      state: store.state,
+      searchText: ""
     }
   },
+
+  methods:{
+    searchPosts(){
+      this.$router.push({path: "/post/search", query:{text: this.searchText}})
+    }
+  }
 }
 </script>
 

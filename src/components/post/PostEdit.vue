@@ -45,7 +45,10 @@ import postApi from "../../api/postApi"
 export default {
   name: "PostEdit",
   components: { Editor, Toolbar },
-  props: ["forumId"],
+  props: [
+    "forumId",
+    "refresh" //发帖后，调用一下刷新页面
+  ],
 
   setup(props) {
     // 编辑器实例，必须用shallowRef
@@ -132,6 +135,7 @@ export default {
         ()=>{
           post.value.title = ""
           post.value.content = ""
+          if(props.refresh) props.refresh()
           ElMessage.success("发布成功")
         }
       )

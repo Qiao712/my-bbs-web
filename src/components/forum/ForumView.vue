@@ -102,6 +102,7 @@ export default {
 
     handlePageChange(pageNo){
       this.pageNo = pageNo
+      this.listPosts()
     }
   }
 }

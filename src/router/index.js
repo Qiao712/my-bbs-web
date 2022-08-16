@@ -15,6 +15,7 @@ import PostsOfUser from "../components/user/PostsOfUser"
 import CommentsOfUser from "../components/user/CommentsOfUser"
 import FavoriteList from "../components/user/FavoriteList"
 import FollowingList from "../components/user/FollowingList"
+import PostSearchView from "../components/post/PostSearchView"
 
 import TestEdit from "../components/test/TestEdit"
 import TestDOMPurify from "../components/test/TestDOMPurify"
@@ -26,6 +27,7 @@ let routes = [
   { path: '/forum/:forumId', component: ForumView},
   { path: '/post/edit', component: PostEdit},
   { path: '/post/:postId', component: PostView},
+  { path: '/post/search', component: PostSearchView},
   { path: '/user', component: UserSpace,
     children:
     [

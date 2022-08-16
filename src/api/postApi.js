@@ -35,6 +35,14 @@ export default{
     })
   },
 
+  searchPosts(params){
+    return request({
+      url: "/posts/search",
+      method: "GET",
+      params
+    })
+  },
+
   removePost(postId){
     return request({
       url: "/posts/" + postId,

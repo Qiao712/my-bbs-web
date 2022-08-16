@@ -3,18 +3,25 @@
     <div class="user-bar">
       <img class="big-avatar" v-if="post.author.avatarUrl" :src="post.author.avatarUrl"/>
       <img class="big-avatar" v-if="! post.author.avatarUrl" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"/>
-      <p class="mid-text">{{post.author.username}}</p>
-      <p class="mid-text">: {{post.title}} </p>
+      <p class="mid-text">{{post.author.username}} : </p>
+
+      <div v-if="!highlight" class="mid-text">{{post.title}} </div>
+      <div v-if="highlight" class="mid-text post-preview" v-html="post.title"></div> <!--允许使用标签,以显示高亮-->
     </div>
 
     <div>
-      <span class="small-text">
-        {{contentText}}
+      <!--显示提取的Text-->
+      <span v-if="!highlight" class="small-text">
+        {{contentText}} 
+      </span>
+      
+      <!--允许使用标签,以显示高亮-->
+      <span v-if="highlight" class="small-text post-preview" v-html="post.content">
       </span>
     </div>
 
     <div class="time-text">
-      👍:{{post.likeCount}} {{post.createTime}}
+      {{post.likeCount}}👍 {{post.createTime}}
     </div>
   </div>
 </template>
@@ -24,7 +31,10 @@ import htmlUtil from "../../util/htmlUtil"
 
 export default {
   name: "PostPreview",
-  props: ["post"],
+  props: [
+    "post",
+    "highlight" //是否启用高亮显示(<em>标签)，用于展示贴子搜索结果
+  ],
 
   data(){
     return {
@@ -32,7 +42,7 @@ export default {
     }
   },
 
-  created(){
+  mounted(){
     this.$watch(
       () => this.post,
       () => this.getPostContentPreview(),
@@ -77,5 +87,14 @@ export default {
   font-size: 16px;
   margin: 2px;
   text-align: right;
+}
+</style>
+
+<style>
+/**搜索结果中关键字的高亮, 要放在不加scoped的style里，否则v-html的内容无法加上样式*/
+.post-preview em{
+  color: blue;
+  font:bold;
+  font-style: normal;
 }
 </style>
