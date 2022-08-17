@@ -52,7 +52,8 @@ export default {
 
   methods:{
     searchPosts(){
-      this.$router.push({path: "/post/search", query:{text: this.searchText}})
+      if(this.searchText.trim().length != 0)
+        this.$router.push({path: "/post/search", query:{text: this.searchText}})
     }
   }
 }
