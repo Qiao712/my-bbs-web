@@ -1,37 +1,25 @@
 <template>
-  <!--论坛标题-->
-  <el-row justify="center" v-if="forum">
-    <el-col class="forum-bar" :xs="24" :sm="24" :md="20" :lg="16" :xl="12">
+  <ViewContainer>
+    <!--论坛标题-->
+    <div class="forum-bar" v-if="forum">
       <el-avatar :size="80" style="margin: 10px" :src="forum.logoUrl" />
       <div class="title-font">{{forum.name}}</div>
-    </el-col>
-  </el-row>
+    </div>
 
-  <el-row justify="center">
-    <el-col :xs="24" :sm="24" :md="20" :lg="16" :xl="12">
-      <PostList :posts="posts"/>
-    </el-col>
-  </el-row>
+    <PostList :posts="posts"/>
+    
+    <el-pagination
+      :current-page="pageNo"
+      :page-size="pageSize"
+      :total="total"
+      :pager-count="5"
+      @current-change="handlePageChange"
+      layout="prev, pager, next"
+      style="background-color: white;"
+    />
 
-  <el-row justify="center">
-    <el-col :xs="24" :sm="24" :md="20" :lg="16" :xl="12">
-      <el-pagination
-        :current-page="pageNo"
-        :page-size="pageSize"
-        :total="total"
-        :pager-count="5"
-        @current-change="handlePageChange"
-        layout="prev, pager, next"
-        style="background-color: white;"
-      />
-    </el-col>
-  </el-row>
-
-  <el-row justify="center">
-    <el-col :xs="24" :sm="24" :md="20" :lg="16" :xl="12">
-      <PostEdit :forumId="forumId"/>
-    </el-col>
-  </el-row>
+    <PostEdit :forumId="forumId"/>
+  </ViewContainer>
 </template>
 
 <script>
@@ -39,13 +27,15 @@ import PostList from "../post/PostList"
 import PostEdit from "../post/PostEdit"
 import postApi from "../../api/postApi"
 import forumApi from "../../api/forumApi"
+import ViewContainer from "../common/ViewContainer.vue"
 
 export default {
   name: "ForumView",
   
   components:{
     PostList,
-    PostEdit
+    PostEdit,
+    ViewContainer
   },
 
    data(){

@@ -12,10 +12,10 @@
     <div>
       <!--显示提取的Text-->
       <span v-if="!highlight" class="small-text">
-        {{contentText}} 
+        {{contentText}}
       </span>
       
-      <!--允许使用标签,以显示高亮-->
+      <!--允许使用标签,以显示高亮,用于展示搜索结果-->
       <span v-if="highlight" class="small-text post-preview" v-html="post.content">
       </span>
     </div>
@@ -31,6 +31,7 @@ import htmlUtil from "../../util/htmlUtil"
 
 export default {
   name: "PostPreview",
+  
   props: [
     "post",
     "highlight" //是否启用高亮显示(<em>标签)，用于展示贴子搜索结果
@@ -42,7 +43,7 @@ export default {
     }
   },
 
-  mounted(){
+  created(){
     this.$watch(
       () => this.post,
       () => this.getPostContentPreview(),

@@ -1,5 +1,5 @@
 <template>
-  <div class="user-nav">
+  <div v-if="visible" class="user-nav">
     <div class="logo" @click="$router.push({path: '/'})">
       没有名字的论坛
     </div> 
@@ -9,9 +9,15 @@
 
     <div class="flex-grow"/>
 
-    <div class="user-info">
-      <!--用户-->
-      <div v-if="state.currentUser">
+    
+    <div>
+      <div v-if="state.currentUser" class="user-info">
+        <!--用户私信-->
+        <el-badge :value="privateMessageCount" :hidden="privateMessageCount==0" style="margin-right: 20px">
+          <Message @click="$router.push({path: '/conversations'})" style="width: 30px; height: 30px;"/>
+        </el-badge>
+
+        <!--用户信息-->
         <el-popover placement="bottom" :width="200" trigger="hover">
           <template #reference>
             <!--用户头像-->    
@@ -29,7 +35,7 @@
       </div>
 
       <!--无法获取当前用户信息则，显示登录、注册-->
-      <div v-if="!state.currentUser">
+      <div v-if="!state.currentUser" class="user-info">
         <el-button type="info" link @click="$router.push({path: '/login'})" class="color-white">登录</el-button>
         <el-button type="info" link @click="test" class="color-white">注册</el-button>
       </div>
@@ -38,22 +44,56 @@
 </template>
 
 <script>
+import messageApi from "../api/messageApi"
 import store from "../store"
+import {Message} from '@element-plus/icons-vue'
 
 export default {
   name: "UserNav",
 
+  components:{
+    Message
+  },
+
   data(){
     return{
+      visible: true,
       state: store.state,
-      searchText: ""
+      
+      searchText: "",
+
+      privateMessageCount: 0, //未读私信数量
     }
+  },
+
+  created(){
+    this.$watch(
+      () => this.$route.path,
+      () => {
+        //切换页面时，刷新未读消息数量
+        this.getPrivateMessageCount()
+
+        //在后台管理页面时(/admin/*)，隐藏该Nav
+        let parts = this.$route.path.split('/')
+        this.visible = !(parts.length >= 2 && parts[1] == "admin")
+      },
+      { immediate: true }
+    )
+
   },
 
   methods:{
     searchPosts(){
       if(this.searchText.trim().length != 0)
         this.$router.push({path: "/post/search", query:{text: this.searchText}})
+    },
+
+    getPrivateMessageCount(){
+      messageApi.getUnacknowledgedPrivateMessageCount().then(
+        response=>{
+          this.privateMessageCount = response.data
+        }
+      )
     }
   }
 }
@@ -73,6 +113,9 @@ export default {
 
 .user-info{
   margin-right: 20px;
+
+  display:flex;
+	align-items:center;
 }
 
 .flex-grow {

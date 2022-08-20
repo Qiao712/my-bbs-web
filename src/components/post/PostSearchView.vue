@@ -1,25 +1,27 @@
 <template>
-  <div class="search-bar">
-    <el-select v-model="searchParam.forumId" placeholder="选择板块">
-      <el-option v-for="forum in forums" :key="forum.id" :label="forum.name" :value="forum.id" />
-    </el-select>
+  <ViewContainer>
+    <div class="search-bar">
+      <el-select v-model="searchParam.forumId" placeholder="选择板块">
+        <el-option v-for="forum in forums" :key="forum.id" :label="forum.name" :value="forum.id" />
+      </el-select>
 
-    <el-input style="margin-left: 10px" v-model="searchParam.text"/>
+      <el-input style="margin-left: 10px" v-model="searchParam.text"/>
+      
+      <el-button style="margin-left: 20px" type="primary" @click="searchPosts()">搜索</el-button>
+    </div>
     
-    <el-button style="margin-left: 20px" type="primary" @click="searchPosts()">搜索</el-button>
-  </div>
-  
-  <PostList :posts="posts" :highlight="true"/>
-  
-  <el-pagination
-    :current-page="searchParam.pageNo"
-    :page-size="searchParam.pageSize"
-    :total="total"
-    :pager-count="5"
-    @current-change="handlePageChange"
-    layout="prev, pager, next"
-    style="background-color: white;"
-  />
+    <PostList :posts="posts" :highlight="true"/>
+    
+    <el-pagination
+      :current-page="searchParam.pageNo"
+      :page-size="searchParam.pageSize"
+      :total="total"
+      :pager-count="5"
+      @current-change="handlePageChange"
+      layout="prev, pager, next"
+      style="background-color: white;"
+    />
+  </ViewContainer>
 </template>
 
 <script>
@@ -27,12 +29,14 @@ import { ElMessage } from 'element-plus/lib/components'
 import postApi from "../../api/postApi"
 import forumApi from "../../api/forumApi"
 import PostList from "./PostList"
+import ViewContainer from "../common/ViewContainer.vue"
 
 export default {
   name: "PostSearchView",
 
   components:{
-    PostList
+    PostList,
+    ViewContainer
   },
 
   data(){

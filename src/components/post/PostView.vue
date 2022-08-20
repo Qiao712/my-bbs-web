@@ -1,50 +1,35 @@
 <template>
-  <el-row justify="center">
-    <el-col :xs="24" :sm="24" :md="20" :lg="14" :xl="12">
-      <p v-if="post" id="post-title">{{post.title}}</p>
-    </el-col>
-  </el-row>
-
-  <!--一楼(贴子内容)-->
-  <!-- <el-row justify="center" v-if="pageNo == 1"> -->
-  <el-row justify="center">
-    <el-col class="reply-col" :xs="24" :sm="24" :md="20" :lg="16" :xl="12">
+  <ViewContainer>
+    <p v-if="post" id="post-title">{{post.title}}</p>
+    
+    <!--一楼(贴子内容)-->
+    <div class="reply-col" v-if="pageNo == 1">
       <FirstLayer v-if="post" :post="post"></FirstLayer>
-    </el-col>
-  </el-row>
+    </div>
 
-  <!--其他楼层-->
-  <el-row justify="center"  v-for="(comment, index) in comments" :key="comment.id">
-    <el-col class="reply-col" :xs="24" :sm="24" :md="20" :lg="16" :xl="12">
+    <!--其他楼层-->
+    <div class="reply-col" v-for="(comment, index) in comments" :key="comment.id">
       <Comment 
         :comment="comment"
         :no="2 + index + (pageNo - 1) * pageSize"
         :refresh="listComments"
       />
-    </el-col>
-  </el-row>
+    </div>
 
-  <!--分页-->
-  <el-row justify="center">
-    <el-col :xs="24" :sm="24" :md="20" :lg="16" :xl="12">
-      <el-pagination
-          :current-page="pageNo"
-          :page-size="pageSize"
-          :total="total"
-          :pager-count="5"
-          @current-change="handlePageChange"
-          layout="prev, pager, next"
-          style="background-color: white;"
-        />
-    </el-col>
-  </el-row>
+    <!--分页-->
+    <el-pagination
+      :current-page="pageNo"
+      :page-size="pageSize"
+      :total="total"
+      :pager-count="5"
+      @current-change="handlePageChange"
+      layout="prev, pager, next"
+      style="background-color: white;"
+    />
 
-  <!-- 回复编辑器 -->
-  <el-row justify="center">
-    <el-col class="reply-col" :xs="24" :sm="24" :md="20" :lg="16" :xl="12">
-      <CommentEdit :post="post" :listComments="listComments"></CommentEdit>
-    </el-col>
-  </el-row>
+    <!-- 回复编辑器 -->
+    <CommentEdit :post="post" :listComments="listComments"></CommentEdit>
+  </ViewContainer>
 </template>
 
 <script>
@@ -53,13 +38,15 @@ import CommentEdit from "./CommentEdit"
 import Comment from "./Comment"
 import postApi from "../../api/postApi"
 import commentApi from "../../api/commentApi"
+import ViewContainer from "../common/ViewContainer.vue"
 
 export default {
   name: "PostView",
   components:{
     FirstLayer,
     CommentEdit,
-    Comment
+    Comment,
+    ViewContainer
   },
   data(){
     return {

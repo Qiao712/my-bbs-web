@@ -1,18 +1,18 @@
 <template>
-  <el-row justify="center">
-    <el-col :xs="24" :sm="24" :md="20" :lg="14" :xl="12">
-      <ForumList/>
-    </el-col>
-  </el-row>
+  <ViewContainer>
+    <ForumList/>
+  </ViewContainer>
 </template>
 
 <script>
 import ForumList from "./post/ForumList.vue"
+import ViewContainer from "../components/common/ViewContainer.vue"
 
 export default {
   name: "IndexView",
   components: {
     ForumList,
+    ViewContainer
   }
 }
 </script>
