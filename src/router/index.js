@@ -18,7 +18,7 @@ import FollowingList from "../components/user/FollowingList"
 import PostSearchView from "../components/post/PostSearchView"
 import ConversationView from "../components/message/ConversationView"
 import ConversationListView from "../components/message/ConversationListView"
-
+import MessageListView from "../components/message/MessageListView"
 import TestEdit from "../components/test/TestEdit"
 import TestDOMPurify from "../components/test/TestDOMPurify"
 
@@ -32,6 +32,7 @@ let routes = [
   { path: '/post/search', component: PostSearchView},
   { path: '/chat/:userId', component: ConversationView},
   { path: '/conversations', component: ConversationListView},
+  { path: '/messages', component: MessageListView},
   { path: '/user', component: UserSpace,
     children:
     [

@@ -13,16 +13,14 @@
       <div class="time-text">{{conversation.createTime}}</div>
     </div>
 
-    <div class="foot">
-      <el-pagination
-        :current-page="params.pageNo"
-        :page-size="params.pageSize"
-        :total="total"
-        :pager-count="8"
-        @current-change="handlePageChange"
-        layout="prev, pager, next"
-      />
-    </div>
+    <el-pagination
+      :current-page="params.pageNo"
+      :page-size="params.pageSize"
+      :total="total"
+      :pager-count="8"
+      @current-change="handlePageChange"
+      layout="prev, pager, next"
+    />
   </ViewContainer>
 </template>
 

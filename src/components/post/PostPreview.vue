@@ -39,7 +39,7 @@ export default {
 
   data(){
     return {
-      contextText: ""
+      contentText: ""
     }
   },
 
@@ -55,6 +55,10 @@ export default {
     getPostContentPreview(){
       if(! this.post) return
       this.contentText = htmlUtil.getTextFromHtml(this.post.content)
+      //限制长度
+      if(this.contentText.length > 200){
+        this.contentText = this.contentText.substring(0, 194) + "......";
+      }
     },
   }
 }

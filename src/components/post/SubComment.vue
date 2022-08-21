@@ -3,7 +3,7 @@
     <!--头像-->
     <div style="text-align: center">
       <el-image class="avatar" :fit="fill" shape="square" v-if="!comment.author.avatarUrl" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"/>
-      <el-image class="avatar" :fit="fill" shape="square" v-if="comment.author.avatarUrl" src="comment.author.avatarUrl"/>
+      <el-image class="avatar" :fit="fill" shape="square" v-if="comment.author.avatarUrl" :src="comment.author.avatarUrl"/>
     </div>
 
     <!--回复-->

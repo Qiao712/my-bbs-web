@@ -46,13 +46,10 @@
 <script>
 import userApi from "../../api/userApi"
 import messageApi from "../../api/messageApi"
+import store from "../../store"
 
 export default {
   name: "ConversationView",
-  
-  components:{
-    
-  },
 
   data(){
     return {
@@ -180,6 +177,9 @@ export default {
             message['createTimeLocalString'] = new Date(message.createTime).toLocaleString()
           })
           this.messages = oldMessages.concat(this.messages)
+
+          //刷新未读消息数量, 让导航栏的红点得到改变
+          store.refreshMessageCount()
         }
       )
     },

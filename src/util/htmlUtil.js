@@ -1,21 +1,29 @@
 import DOMPurify from "dompurify"
 
-//提取HTML中的所有Text
+/**
+ * 生成预览
+ * 提取HTML中的所有Text并拼接
+ */
 const getTextFromHtml = (html)=>{
     let domparser = new DOMParser()
     let content = domparser.parseFromString(html, "text/html")
     let contentText = ""
 
     let travel = (node)=>{
-    if(node.nodeType == 3){
-        //若为TEXT_NODE节点
-        contentText += node.nodeValue + " "
-        return
-    }
+        if(node.nodeType == 3){
+            //若为TEXT_NODE节点
+            contentText += node.nodeValue + " "
+            return
+        }
 
-    node.childNodes.forEach(childNode => {
-        travel(childNode)
-    })
+        if(node.nodeType == 1 && node.nodeName == 'IMG'){
+            //图片元素
+            contentText += "[图片] "
+        }
+
+        node.childNodes.forEach(childNode => {
+            travel(childNode)
+        })
     }
 
     travel(content)

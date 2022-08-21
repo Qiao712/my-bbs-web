@@ -9,12 +9,16 @@
 
     <div class="flex-grow"/>
 
-    
+    <!--靠右一栏-->
     <div>
       <div v-if="state.currentUser" class="user-info">
         <!--用户私信-->
-        <el-badge :value="privateMessageCount" :hidden="privateMessageCount==0" style="margin-right: 20px">
+        <el-badge :value="state.privateMessageCount" :hidden="state.privateMessageCount==0" style="margin-right: 20px">
           <Message @click="$router.push({path: '/conversations'})" style="width: 30px; height: 30px;"/>
+        </el-badge>
+        <!--通知消息--> 
+        <el-badge :value="state.systemMessageCount" :hidden="state.systemMessageCount==0" style="margin-right: 20px">
+          <Bell @click="$router.push({path: '/messages'})" style="width: 30px; height: 30px;"/>
         </el-badge>
 
         <!--用户信息-->
@@ -44,25 +48,23 @@
 </template>
 
 <script>
-import messageApi from "../api/messageApi"
 import store from "../store"
-import {Message} from '@element-plus/icons-vue'
+import {Message, Bell} from '@element-plus/icons-vue'
 
 export default {
   name: "UserNav",
 
   components:{
-    Message
+    Message,
+    Bell
   },
 
   data(){
     return{
       visible: true,
       state: store.state,
-      
-      searchText: "",
 
-      privateMessageCount: 0, //未读私信数量
+      searchText: "",
     }
   },
 
@@ -71,7 +73,7 @@ export default {
       () => this.$route.path,
       () => {
         //切换页面时，刷新未读消息数量
-        this.getPrivateMessageCount()
+        this.getMessageCount()
 
         //在后台管理页面时(/admin/*)，隐藏该Nav
         let parts = this.$route.path.split('/')
@@ -88,12 +90,8 @@ export default {
         this.$router.push({path: "/post/search", query:{text: this.searchText}})
     },
 
-    getPrivateMessageCount(){
-      messageApi.getUnacknowledgedPrivateMessageCount().then(
-        response=>{
-          this.privateMessageCount = response.data
-        }
-      )
+    getMessageCount(){
+      store.refreshMessageCount()
     }
   }
 }
