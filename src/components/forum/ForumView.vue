@@ -6,6 +6,12 @@
       <div class="title-font">{{forum.name}}</div>
     </div>
 
+    <!--选择排序方式-->
+    <el-radio-group v-model="orderBy" @change="listPosts">
+      <el-radio label="score" size="large">最热</el-radio>
+      <el-radio label="create_time" size="large">最新</el-radio>
+    </el-radio-group>
+
     <PostList :posts="posts"/>
     
     <el-pagination
@@ -47,7 +53,8 @@ export default {
 
       pageSize: 10,
       pageNo: 1,
-      total: 0
+      total: 0,
+      orderBy: "score",
     }
   },
 
@@ -70,11 +77,13 @@ export default {
 
     listPosts(){
       if(!this.forumId) return
+      console.log(this.orderBy)
 
       let params = {
         pageSize: this.pageSize,
         pageNo: this.postNo,
-        forumId: this.forumId
+        forumId: this.forumId,
+        orderBy: this.orderBy
       }
 
       postApi.listPosts(params).then(
@@ -93,7 +102,7 @@ export default {
     handlePageChange(pageNo){
       this.pageNo = pageNo
       this.listPosts()
-    }
+    },
   }
 }
 </script>

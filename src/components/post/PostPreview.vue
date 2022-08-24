@@ -21,7 +21,7 @@
     </div>
 
     <div class="time-text">
-      {{post.likeCount}}👍 {{post.createTime}}
+      {{post.likeCount}}👍 {{post.commentCount}}条评论 {{post.createTime}}
     </div>
   </div>
 </template>
