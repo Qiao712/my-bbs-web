@@ -59,6 +59,7 @@
 </template>
 
 <script>
+import { ElMessage } from 'element-plus/lib/components'
 import userApi from "../../api/userApi"
 import roleApi from "../../api/roleApi"
 
@@ -89,7 +90,7 @@ export default {
   },
 
   created(){
-    this.getUsers()
+    this.listUsers()
     this.getRoles()
   },
 
@@ -102,8 +103,8 @@ export default {
   },
 
   methods:{
-    getUsers(){
-      userApi.getUsers(this.query).then(
+    listUsers(){
+      userApi.listUsers(this.query).then(
         response => {
           this.query.pageNo = response.data.current
           this.users = response.data.records
@@ -129,12 +130,15 @@ export default {
     queryUser(){
       this.query.username = this.queryForm.username
       this.query.role = this.queryForm.role
-      this.getUsers()
+      this.listUsers()
     },
 
     removeUser(index){
       userApi.removeUser(this.users[index].id).then(
-        () => this.getUsers()
+        () => {
+          this.listUsers()
+          ElMessage.success("删除成功")
+        }
       )
     },
 
@@ -148,7 +152,7 @@ export default {
 
     handlePageChange(pageNo){
       this.query.pageNo = pageNo
-      this.getUsers()
+      this.listUsers()
     }
   }
 }

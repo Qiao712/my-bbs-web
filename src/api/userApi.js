@@ -46,7 +46,7 @@ export default{
     })
   },
 
-  getUsers(query){
+  listUsers(query){
     return request({
       url: "/users",
       method: "GET",

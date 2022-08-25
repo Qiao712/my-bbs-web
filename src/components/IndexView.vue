@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import ForumList from "./post/ForumList.vue"
+import ForumList from "./forum/ForumList.vue"
 import ViewContainer from "../components/common/ViewContainer.vue"
 
 export default {

@@ -1,4 +1,5 @@
 <template>
+  {{username}}
   <PostList :posts="posts"/>
 
   <el-pagination
@@ -18,7 +19,7 @@ import postApi from "../../api/postApi"
 
 export default {
   name: "PostsOfUser",
-  props: ["userId"],
+  props: ["username"],
   components:{
     PostList
   },
@@ -38,12 +39,13 @@ export default {
 
   methods:{
     getPosts(){
-      if(!this.userId) return
+      if(!this.username) return
       
       let params = {
         pageSize: this.pageSize,
         pageNo: this.postNo,
-        authorId: this.userId
+        authorUsername: this.username,
+        orderBy: "create_time",
       }
 
       postApi.listPosts(params).then(

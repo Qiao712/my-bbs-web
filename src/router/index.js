@@ -5,16 +5,14 @@ import Register from "../components/user/RegisterView"
 import LoginView from "../components/admin/LoginView"
 import Users from "../components/admin/Users"
 import Roles from "../components/admin/Roles"
+import Posts from "../components/admin/Posts"
+import Comments from "../components/admin/Comments"
 import UserEdit from "../components/admin/UserEdit"
 import PostEdit from "../components/post/PostEdit"
 import PostView from "../components/post/PostView"
 import ForumView from "../components/forum/ForumView"
 import Forums from "../components/admin/Forums"
 import UserSpace from "../components/user/UserSpace"
-import PostsOfUser from "../components/user/PostsOfUser"
-import CommentsOfUser from "../components/user/CommentsOfUser"
-import FavoriteList from "../components/user/FavoriteList"
-import FollowingList from "../components/user/FollowingList"
 import PostSearchView from "../components/post/PostSearchView"
 import ConversationView from "../components/message/ConversationView"
 import ConversationListView from "../components/message/ConversationListView"
@@ -33,15 +31,7 @@ let routes = [
   { path: '/chat/:userId', component: ConversationView},
   { path: '/conversations', component: ConversationListView},
   { path: '/messages', component: MessageListView},
-  { path: '/user', component: UserSpace,
-    children:
-    [
-      { path: ":userId/posts", component: PostsOfUser, props: true},
-      { path: ":userId/comments", component: CommentsOfUser, props: true},
-      { path: ":userId/favorites", component: FavoriteList, props: true},
-      { path: ":userId/following", component: FollowingList, props: true}
-    ]
-  },
+  { path: '/user', component: UserSpace},
 
   //后台管理
   { path: '/admin/login', component: LoginView},
@@ -52,7 +42,9 @@ let routes = [
       { path: 'users', component: Users},
       { path: 'users/:userId/edit', component: UserEdit},
       { path: 'roles', component: Roles},
-      { path: 'forum', component: Forums}
+      { path: 'forum', component: Forums},
+      { path: 'posts', component: Posts},
+      { path: 'comments', component: Comments}
     ]
   },
 

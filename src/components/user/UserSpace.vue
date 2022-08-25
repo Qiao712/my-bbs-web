@@ -33,34 +33,39 @@
         </div>
       </div>
 
-      <div>
-        <!--功能选择菜单-->
-        <el-menu
-          class="el-menu-demo"
-          mode="horizontal"
-          @select="handleSelect"
-        >
-          <el-menu-item index="posts">我发的贴</el-menu-item>
-          <el-menu-item index="comments">我的评论</el-menu-item>
-          <el-menu-item index="favorites">收藏</el-menu-item>
-          <el-menu-item index="following">关注</el-menu-item>
-        </el-menu>
-      </div>
-
-      <!--用户空间内的功能-->
-      <router-view/>
+      <!--功能选择菜单-->
+      <el-tabs v-model="activeName" v-if="currentUser.id">
+        <el-tab-pane label="我的贴子" name="1"><PostsOfUser :username="currentUser.username"/></el-tab-pane>
+        <el-tab-pane label="我的评论" name="2"><CommentsOfUser :username="currentUser.username"/></el-tab-pane>
+        <el-tab-pane label="收藏" name="3"><FavoriteList :userId="currentUser.id"/></el-tab-pane>
+        <el-tab-pane label="关注" name="4"><FollowingList :userId="currentUser.id"/></el-tab-pane>
+      </el-tabs>
     </el-col>
   </el-row>
 </template>
 
 <script>
 import userApi from "../../api/userApi"
+import PostsOfUser from "./PostsOfUser.vue"
+import FavoriteList from "./FavoriteList.vue"
+import CommentsOfUser from "./CommentsOfUser.vue"
+import FollowingList from "./FollowingList.vue"
 
 export default {
   name: 'UserSpace',
+
+  components:{
+    PostsOfUser,
+    FavoriteList,
+    CommentsOfUser,
+    FollowingList
+  },
+
   data(){
     return{
-      currentUser: {}
+      currentUser: {},
+      
+      activeName: "1"
     }
   },
 

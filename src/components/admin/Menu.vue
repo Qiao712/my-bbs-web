@@ -29,14 +29,14 @@
     <el-sub-menu index="2">
       <template #title>
         <!-- <el-icon><location /></el-icon> -->
-        <span>贴子管理</span>
+        <span>内容管理</span>
       </template>
 
-      <el-menu-item index="3-1">贴子列表</el-menu-item>
-      <el-menu-item index="3-2">标签列表</el-menu-item>
+      <el-menu-item index="/admin/posts">贴子列表</el-menu-item>
+      <el-menu-item index="/admin/comments">评论列表</el-menu-item>
+      <el-menu-item index="/admin/forum">板块管理</el-menu-item>
       <el-menu-item index="3-3">贴子审核</el-menu-item>
       <el-menu-item index="3-4">评论审核</el-menu-item>
-      <el-menu-item index="/admin/forum">板块管理</el-menu-item>
     </el-sub-menu>
   </el-menu>
 </template>

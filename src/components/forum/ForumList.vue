@@ -1,13 +1,4 @@
 <template>
-  <!-- <div>
-    <div v-for="(forums, index) in groupedForum" :key="index">
-      分类: {{forums[0].category}}
-      <div v-for="forum in forums" :key="forum.id">
-        {{forum}}
-      </div>
-    </div>
-  </div> -->
-
   <div class="forum-category" :gutter="20" v-for="(forums, index) in groupedForum" :key="index">
     <div class="category-bar">
       {{forums[0].category}}

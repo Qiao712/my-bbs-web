@@ -44,7 +44,7 @@ import htmlUtil from "../../util/htmlUtil"
 export default {
   name: "CommentsOfUser",
   
-  props: ["userId"],
+  props: ["username"],
   
   data(){
     return{
@@ -61,13 +61,15 @@ export default {
   
   methods:{
     getCommentsByAuthor(){
+      if(!this.username) return
+      
       let params = {
         pageNo: this.pageNo,
         pageSize: this.pageSize,
-        authorId: this.userId
+        authorUsername: this.username
       }
 
-      commentApi.listCommentsByAuthor(params).then(
+      commentApi.listCommentDetails(params).then(
         response=>{
           this.pageNo = response.data.current
           this.comments = response.data.records

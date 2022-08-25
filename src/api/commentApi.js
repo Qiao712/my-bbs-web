@@ -17,9 +17,9 @@ export default{
     })
   },
 
-  listCommentsByAuthor(params){
+  listCommentDetails(params){
     return request({
-      url: "/comments/my",
+      url: "/comments/details",
       method: "GET",
       params
     })
