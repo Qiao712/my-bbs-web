@@ -8,7 +8,7 @@ const service = axios.create({
   withCredentials: true
 })
 
-//request拦截器
+//request拦截器，在HEADER中添加token
 let requestIntercepter = config => {
   let token = sessionStorage.getItem("Token")
   token = token ? token : localStorage.getItem("Token")
@@ -44,6 +44,14 @@ let responseIntercepter = response => {
     
     //无权访问
     case 401: break
+
+    //Token过期
+    case 3: {
+      //清除token
+      sessionStorage.removeItem("Token")
+      localStorage.removeItem("Token")
+      break
+    }
   }
 
   //返回同一的返回对象

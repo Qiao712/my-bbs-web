@@ -10,7 +10,7 @@
         <span>系统监控</span>
       </template>
       
-      <el-menu-item index="1-1">概况</el-menu-item>
+      <el-menu-item index="/admin/statistic">统计</el-menu-item>
     </el-sub-menu>
 
 
@@ -35,8 +35,8 @@
       <el-menu-item index="/admin/posts">贴子列表</el-menu-item>
       <el-menu-item index="/admin/comments">评论列表</el-menu-item>
       <el-menu-item index="/admin/forum">板块管理</el-menu-item>
-      <el-menu-item index="3-3">贴子审核</el-menu-item>
-      <el-menu-item index="3-4">评论审核</el-menu-item>
+      <!-- <el-menu-item index="3-3">贴子审核</el-menu-item>
+      <el-menu-item index="3-4">评论审核</el-menu-item> -->
     </el-sub-menu>
   </el-menu>
 </template>
