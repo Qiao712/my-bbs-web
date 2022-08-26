@@ -30,5 +30,19 @@ export default{
       url: "/comments/" + commentId,
       method: "DELETE",
     })
+  },
+
+  likeComment(commentId){
+    return request({
+      url: "/comments/" + commentId + "/like",
+      method: "GET"
+    })
+  },
+
+  undoLikeComment(commentId){
+    return request({
+      url: "/comments/" + commentId + "/undo-like",
+      method: "GET"
+    })
   }
 }

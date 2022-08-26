@@ -4,7 +4,6 @@
       <img class="big-avatar" v-if="post.author.avatarUrl" :src="post.author.avatarUrl"/>
       <img class="big-avatar" v-if="! post.author.avatarUrl" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"/>
       <p class="small-text">{{post.author.username}}</p>
-      <p class="small-text">{等级}</p>
     </div>
 
     <div class="post-content">
@@ -14,14 +13,13 @@
 
       <!--按钮条-->
       <div class="bottom-bar">
-        <el-button type="primary" @click="likePost"     plain v-if="!liked">赞 {{likeCount}}</el-button>
-        <el-button type="primary" @click="undoLikePost" v-if="liked">已赞 {{likeCount}}</el-button>
+        <el-button link type="info" @click="likePost" v-if="!liked">赞 {{likeCount}}</el-button>
+        <el-button link type="primary" @click="undoLikePost" v-if="liked">已赞 {{likeCount}}</el-button>
 
         <span class="small-text">1楼</span>
         <span class="small-text">{{post.createTime}}</span>
         
-        <span class="small-text" style="color: blue">举报</span>
-        <span class="small-text" style="color: blue" @click="removePost">删除</span>
+        <el-button link @click="removePost">删除</el-button>
       </div>
     </div>
   </div>
@@ -85,6 +83,10 @@ export default {
 </script>
 
 <style scoped>
+.editor-content-view{
+  min-height: 150px;
+}
+
 /* 大屏 */
 @media (max-device-width: 499px) {
   .comment{

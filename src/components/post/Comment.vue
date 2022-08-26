@@ -4,7 +4,6 @@
       <img class="big-avatar" v-if="comment.author.avatarUrl" :src="comment.author.avatarUrl"/>
       <img class="big-avatar" v-if="! comment.author.avatarUrl" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"/>
       <p class="small-text">{{comment.author.username}}</p>
-      <p class="small-text">{等级}</p>
     </div>
 
     <div class="comment-content">
@@ -30,11 +29,13 @@
 
       <!--按钮条-->
       <div class="bottom-bar">
+        <el-button link type="info" @click="likeComment"     plain v-if="!liked">赞 {{likeCount}}</el-button>
+        <el-button link type="primary" @click="undoLikeComment" v-if="liked">已赞 {{likeCount}}</el-button>
+
         <span class="small-text">{{no}}楼</span>
         <span class="small-text">{{comment.createTime}}</span>
-        <span class="small-text" style="color: blue">举报</span>
-        <span class="small-text" style="color: blue" @click="replyDialogVisible = true">回复</span>
-        <span class="small-text" style="color: blue" @click="deleteComment">删除</span>
+        <el-button link @click="replyDialogVisible = true">回复</el-button>
+        <el-button link @click="deleteComment">删除</el-button>
       </div>
     </div>
   </div>
@@ -70,6 +71,9 @@ export default {
       pageSize: 5,
       pageNo: 1,
       total: 0,
+
+      liked: this.comment.liked,          //是否已点赞
+      likeCount: this.comment.likeCount,  //点赞数
 
       //回复弹窗
       replyDialogVisible: false,
@@ -147,6 +151,26 @@ export default {
           if(this.refresh) this.refresh()
         }
       )
+    },
+
+    likeComment(){
+      commentApi.likeComment(this.comment.id).then(
+        ()=>{
+          this.liked = true
+          this.likeCount++
+          ElMessage.success("点赞成功")
+        }
+      )
+    },
+
+    undoLikeComment(){
+      commentApi.undoLikeComment(this.comment.id).then(
+        ()=>{
+          this.liked = false
+          this.likeCount--
+          ElMessage.success("取消点赞成功")
+        }
+      )
     }
   }
 }
@@ -154,6 +178,10 @@ export default {
 
 <style scoped>
 @import "../../assets/css/edit-content.css";
+
+.editor-content-view{
+  min-height: 100px;
+}
 
 @media (max-device-width: 500px) {
   .comment{

@@ -5,6 +5,11 @@
       <el-avatar :size="80" style="margin: 10px" :src="forum.logoUrl" />
       <div class="title-font">{{forum.name}}</div>
     </div>
+    
+    <!--论坛描述-->
+    <div class="font-size: 16px" v-if="forum">
+      {{forum.description}}
+    </div>
 
     <!--选择排序方式-->
     <el-radio-group v-model="orderBy" @change="listPosts">

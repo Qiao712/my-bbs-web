@@ -19,8 +19,10 @@
 
       <!--按钮条-->
       <div class="bottom-bar">
-        <span class="small-text">{{comment.createTime}}</span>
-        <span class="small-text" style="color: blue" @click="replyDialogVisible = true">回复</span>
+        <el-button link @click="likeComment" v-if="!liked">点赞 {{likeCount}}</el-button>
+        <el-button link type="primary" @click="undoLikeComment" v-if="liked">已赞 {{likeCount}}</el-button>
+        <el-button link>{{comment.createTime}}</el-button>
+        <el-button link @click="replyDialogVisible = true">回复</el-button>
       </div>
 
       <!--回复弹窗-->
@@ -47,6 +49,9 @@ export default {
       //回复
       replyDialogVisible: false,
       replyContent: "",
+
+      liked: this.comment.liked,          //是否已点赞
+      likeCount: this.comment.likeCount,  //点赞数
     }
   },
 
@@ -68,6 +73,26 @@ export default {
         }
       )
     },
+
+    likeComment(){
+      commentApi.likeComment(this.comment.id).then(
+        ()=>{
+          this.liked = true
+          this.likeCount++
+          ElMessage.success("点赞成功")
+        }
+      )
+    },
+
+    undoLikeComment(){
+      commentApi.undoLikeComment(this.comment.id).then(
+        ()=>{
+          this.liked = false
+          this.likeCount--
+          ElMessage.success("取消点赞成功")
+        }
+      )
+    }
   }
 }
 </script>
