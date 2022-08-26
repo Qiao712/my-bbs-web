@@ -6,7 +6,7 @@ import LoginView from "../components/admin/LoginView"
 import Users from "../components/admin/Users"
 import Roles from "../components/admin/Roles"
 import Posts from "../components/admin/Posts"
-import Statistics from "../components/admin/Statistics"
+import Statistic from "../components/admin/Statistic"
 import Comments from "../components/admin/Comments"
 import UserEdit from "../components/admin/UserEdit"
 import PostEdit from "../components/post/PostEdit"
@@ -46,7 +46,7 @@ let routes = [
       { path: 'forum', component: Forums},
       { path: 'posts', component: Posts},
       { path: 'comments', component: Comments},
-      { path: 'statistic', component: Statistics}
+      { path: 'statistic', component: Statistic},
     ]
   },
 

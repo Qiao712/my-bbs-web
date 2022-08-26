@@ -1,7 +1,7 @@
 <template>
   <!--展示统计信息-->
-  <el-row>
-    <el-col :span="8" v-if="statistic">
+  <el-row v-if="statistic">
+    <el-col :span="8">
       <el-card class="box-card">
         贴子总数: {{statistic.postCount}}
       </el-card>
@@ -33,11 +33,11 @@ export default {
   },
 
   created(){
-    this.getStatistics()
+    this.getStatistic()
   },
 
   methods:{
-    getStatistics(){
+    getStatistic(){
       systemApi.getStatistic().then(
         (response)=>{
           this.statistic = response.data
