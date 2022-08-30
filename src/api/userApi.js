@@ -54,16 +54,18 @@ export default{
     })
   },
 
+  //admin---------------------------------
+
   setUserStatus(userId, enable){
     return request({
-      url: ["/users", userId, "status", enable].join("/"),
+      url: ["/admin/users", userId, "status", enable].join("/"),
       method: "PUT"
     })
   },
 
   updateUser(user){
     return request({
-      url: "/users",
+      url: "/admin/users",
       method: "PUT",
       data: user
     })
@@ -71,7 +73,7 @@ export default{
 
   removeUser(userId){
     return request({
-      url: "/users/" + userId,
+      url: "/admin/users/" + userId,
       method: "DELETE"
     })
   }

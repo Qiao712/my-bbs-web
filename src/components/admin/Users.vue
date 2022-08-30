@@ -91,7 +91,7 @@ export default {
 
   created(){
     this.listUsers()
-    this.getRoles()
+    this.listRoles()
   },
 
   mounted(){
@@ -119,8 +119,8 @@ export default {
       )
     },
 
-    getRoles(){
-      roleApi.getRoles().then(
+    listRoles(){
+      roleApi.listRoles().then(
         response => {
           this.roles = response.data
         }

@@ -51,7 +51,7 @@ export default {
 
   methods:{
     removePost(){
-      postApi.removePost(this.post.id).then(
+      postApi.removeMyPost(this.post.id).then(
         ()=>{
           ElMessage.success("删除成功")
           this.$router.push({path: "/forum/" + this.post.forumId})

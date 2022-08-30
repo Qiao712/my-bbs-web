@@ -1,10 +1,48 @@
 import request from "./request"
 
 export default{
-  getRoles(){
+  listRoles(){
     return request({
-      url: "/roles",
+      url: "/admin/roles",
       method: "GET"
+    })
+  },
+
+  getRole(roleId){
+    return request({
+      url: "/admin/roles/" + roleId,
+      method: "GET"
+    })
+  },
+
+  updateRole(role){
+    return request({
+      url: "/admin/roles",
+      method: "PUT",
+      data: role
+    })
+  },
+
+  addRole(role){
+    return request({
+      url: "/admin/roles",
+      method: "POST",
+      data: role
+    })
+  },
+
+  listAuthorities(){
+    return request({
+      url: "/admin/roles/authorities",
+      method: "GET"
+    })
+  },
+
+  updateAuthority(authority){
+    return request({
+      url: "/admin/roles/authorities",
+      method: "PUT",
+      data: authority
     })
   }
 }

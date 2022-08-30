@@ -36,12 +36,14 @@ export default {
     )
 
     //获取当前用户信息
-    userApi.getCurrentUser().then(
-      (response)=>{
-        store.setCurrentUser(response.data)
-        console.info("当前用户:", store.state.currentUser)
-      }
-    )
+    if(localStorage.getItem("Token") || sessionStorage.getItem("Token")){
+      userApi.getCurrentUser().then(
+        (response)=>{
+          store.setCurrentUser(response.data)
+          console.info("当前用户:", store.state.currentUser)
+        }
+      )
+    }
   }
 }
 </script>

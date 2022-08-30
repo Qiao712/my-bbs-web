@@ -23,6 +23,7 @@
 
       <el-menu-item index="/admin/users">用户列表</el-menu-item>
       <el-menu-item index="/admin/roles">角色列表</el-menu-item>
+      <el-menu-item index="/admin/authorities">权限列表</el-menu-item>
     </el-sub-menu>
 
     <!-- 贴子管理 -->

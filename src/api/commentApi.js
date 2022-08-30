@@ -17,18 +17,10 @@ export default{
     })
   },
 
-  listCommentDetails(params){
-    return request({
-      url: "/comments/details",
-      method: "GET",
-      params
-    })
-  },
-
-  deleteComment(commentId){
+  removeMyComment(commentId){
     return request({
       url: "/comments/" + commentId,
-      method: "DELETE",
+      method: "DELETE"
     })
   },
 
@@ -38,11 +30,28 @@ export default{
       method: "GET"
     })
   },
-
+  
   undoLikeComment(commentId){
     return request({
       url: "/comments/" + commentId + "/undo-like",
       method: "GET"
     })
-  }
+  },
+
+  //admin--------------
+
+  listCommentDetails(params){
+    return request({
+      url: "/admin/comments/details",
+      method: "GET",
+      params
+    })
+  },
+
+  removeComment(commentId){
+    return request({
+      url: "/admin/comments/" + commentId,
+      method: "DELETE",
+    })
+  },
 }

@@ -23,9 +23,11 @@ export default{
     })
   },
 
+  //admin------------------
+
   addForum(forum){
     return request({
-      url: "/forums",
+      url: "/admin/forums",
       method: "POST",
       data: forum
     })
@@ -33,14 +35,14 @@ export default{
 
   removeForum(forumId){
     return request({
-      url: "/forums/" + forumId,
+      url: "/admin/forums/" + forumId,
       method: "DELETE",
     })
   },
 
   updateForum(forum){
     return request({
-      url: "/forums",
+      url: "/admin/forums",
       method: "PUT",
       data: forum
     })
@@ -48,14 +50,14 @@ export default{
 
   listCategories(){
     return request({
-      url: "/forums/categories",
+      url: "/admin/forums/categories",
       method: "GET"
     })
   },
 
   setForumLogo(forumId, formData){
     return request({
-      url: "/forums/" + forumId + "/logo",
+      url: "/admin/forums/" + forumId + "/logo",
       method: "PUT",
       data: formData
     })

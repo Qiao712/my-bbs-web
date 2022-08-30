@@ -145,7 +145,7 @@ export default {
     },
 
     deleteComment(){
-      commentApi.deleteComment(this.comment.id).then(
+      commentApi.removeMyComment(this.comment.id).then(
         ()=>{
           ElMessage.success("删除成功")
           if(this.refresh) this.refresh()

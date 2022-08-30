@@ -43,7 +43,7 @@ export default{
     })
   },
 
-  removePost(postId){
+  removeMyPost(postId){
     return request({
       url: "/posts/" + postId,
       method: "DELETE"
@@ -62,5 +62,14 @@ export default{
       url: "/posts/" + postId + "/undo-like",
       method: "GET"
     })
-  }
+  },
+
+  //admin-----------------------------
+
+  removePost(postId){
+    return request({
+      url: "/admin/posts/" + postId,
+      method: "DELETE"
+    })
+  },
 }
