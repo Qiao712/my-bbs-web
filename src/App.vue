@@ -1,6 +1,6 @@
 <template>
   <!-- 用户端页面的导航栏 -->
-  <div v-if="!admin">
+  <div v-if="visible">
     <UserNav/>
   </div>
 
@@ -20,17 +20,22 @@ export default {
 
   data(){
     return {
-      admin: false  //是否在管理员页面
+      visible: false  //在管理员页面 和 登录页面不显示
     }
   },
 
   created(){
-    //在后台管理页面时(/admin/*)，改变最外层的布局
+    //在后台管理页面时(/visible/*)，改变最外层的布局
     this.$watch(
       () => this.$route.path,
       () => {
+        //在管理员界面隐藏
         let parts = this.$route.path.split('/')
-        this.admin = (parts.length >= 2 && parts[1] == "admin")
+        this.visible = !(parts.length >= 2 && parts[1] == "visible")
+        
+        //在登录界面隐藏
+        if(this.$route.path == "/login")
+          this.visible = false
       },
       { immediate: true }
     )

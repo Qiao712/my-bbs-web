@@ -5,30 +5,12 @@
         <!--用户信息-->
         <div class="user-info" v-if="currentUser">
           <el-avatar class="big-avatar" v-if="currentUser.avatarUrl" shape="square" :size="80" :src="currentUser.avatarUrl"/>
-          <el-avatar class="big-avatar" v-if="!currentUser.avatarUrl" shape="square" :size="80" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"/>
+          <el-avatar class="big-avatar" v-if="!currentUser.avatarUrl" shape="square" :size="80" src="../assets/default-avatar.png"/>
           
           <div>
             <div class="username-text">
               {{currentUser.username}}
             </div>
-
-            <!--角色信息-->
-            <div class="username-text">
-              <span v-if="currentUser.role == 'ROLE_ADMIN'">管理员</span>
-              <span v-if="currentUser.role == 'ROLE_NORMAL'">普通用户</span>
-            </div>
-          </div>
-        </div>
-
-
-        <!--统计信息-->
-        <div class="usage-info">
-          <div>
-            发帖数: 
-          </div>
-          
-          <div>
-            获赞: 
           </div>
         </div>
       </div>

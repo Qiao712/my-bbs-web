@@ -25,7 +25,8 @@
         
         <el-table-column label="Logo">
           <template #default="scope">
-            <el-avatar :size="32" :src="getLogoUrl(scope.$index)" />
+            <img class="logo" v-if="forums[scope.$index].logoUrl" :src="forums[scope.$index].logoUrl" />
+            <img class="logo" v-if="!forums[scope.$index].logoUrl" src="../../assets/default-forum-logo.png" />
           </template>
         </el-table-column>
         
@@ -170,10 +171,6 @@ export default {
       this.query.pageNo = pageNo
       this.listForums()
     },
-
-    getLogoUrl(index){
-      return this.forums[index].logoUrl
-    }
   }
 }
 </script>
@@ -199,5 +196,11 @@ export default {
 
 .el-form{
   margin: 10px;
+}
+
+.logo{
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
 }
 </style>

@@ -24,7 +24,8 @@
         
         <el-table-column label="头像">
           <template #default="scope">
-            <el-avatar :size="32" :src="getAvatarUrl(scope.$index)" />
+            <img class="avatar" v-if="users[scope.$index].avatarUrl" :src="users[scope.$index].avatarUrl" />
+            <img class="avatar" v-if="!users[scope.$index].avatarUrl" src="../../assets/default-avatar.png" />
           </template>
         </el-table-column>
 
@@ -142,10 +143,6 @@ export default {
       )
     },
 
-    getAvatarUrl(index){
-      return this.users[index].avatarUrl ? this.users[index].avatarUrl : "https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"
-    },
-
     editUser(index){
       this.$router.push({path: "/admin/users/" + this.users[index].id + "/edit"})
     },
@@ -171,5 +168,11 @@ export default {
 
 .main{
   overflow: auto;
+}
+
+.avatar{
+  height: 32px;
+  width: 32px;
+  border-radius: 100%;
 }
 </style>

@@ -6,7 +6,8 @@
 
     <el-row class="forums">
       <el-col class="forum-box" @click="goToForum(forum)" :span="6" v-for="forum in forums" :key="forum.id">
-        <el-avatar :size="64" style="margin: 5px" :src="forum.logoUrl" />
+        <img class="forum-logo" v-if="forum.logoUrl" :src="forum.logoUrl" />
+        <img class="forum-logo" v-if="!forum.logoUrl" src="../../assets/default-forum-logo.png" />
         <div style="font-size: 18px">{{forum.name}}</div>
       </el-col>
     </el-row>
@@ -84,5 +85,12 @@ export default {
   height: 80px;
   display:flex;
 	align-items:center;
+}
+
+.forum-logo{
+  margin: 5px;
+  height: 64px;
+  width: 64px;
+  border-radius: 100%;
 }
 </style>

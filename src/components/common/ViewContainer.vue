@@ -11,7 +11,3 @@ export default {
   name: "ViewContainer"
 }
 </script>
-
-<style>
-
-</style>

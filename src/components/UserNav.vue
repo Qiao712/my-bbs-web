@@ -33,7 +33,7 @@
           
           <!--弹出框中展示用户信息-->
           <div>
-            {{state.currentUser.username}}
+            欢迎 {{state.currentUser.username}} 点击进入用户空间
           </div>
         </el-popover>
       </div>
