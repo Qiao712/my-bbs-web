@@ -1,4 +1,6 @@
 <template>
+  <el-empty description="无评论" v-if="!comments || comments.length == 0"/>
+
   <div class="comment-preview" v-for="comment in comments" :key="comment.id">
     <div>
       在 
@@ -69,7 +71,7 @@ export default {
         authorUsername: this.username
       }
 
-      commentApi.listCommentDetails(params).then(
+      commentApi.removeMyComment(params).then(
         response=>{
           this.pageNo = response.data.current
           this.comments = response.data.records

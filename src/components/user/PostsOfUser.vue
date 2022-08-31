@@ -1,5 +1,4 @@
 <template>
-  {{username}}
   <PostList :posts="posts"/>
 
   <el-pagination

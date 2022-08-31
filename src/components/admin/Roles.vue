@@ -7,6 +7,7 @@
     <el-table-column label="操作">
       <template #default="scope">
         <el-button link type="primary" size="small" @click.prevent="setAuthorities(scope.$index)">权限设置</el-button>
+        <el-button link type="primary" size="small" @click.prevent="removeRole(scope.$index)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -139,6 +140,15 @@ export default {
           this.listRoles()
           this.roleAdding = false
           ElMessage.success("添加成功")
+        }
+      )
+    },
+
+    removeRole(index){
+      roleApi.removeRole(this.roles[index].id).then(
+        ()=>{
+          this.listRoles()
+          ElMessage.success("删除成功")
         }
       )
     }

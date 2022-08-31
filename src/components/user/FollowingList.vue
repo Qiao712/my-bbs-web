@@ -1,5 +1,5 @@
 <template>
-  关注列表
+  开发中...
 </template>
 
 <script>

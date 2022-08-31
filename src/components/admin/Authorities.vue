@@ -3,11 +3,13 @@
     <el-table-column prop="authority" label="权限"/>
     <el-table-column prop="category" label="分类"/>
     <el-table-column prop="name" label="名称"/>
+    <el-table-column prop="valid" label="有效性"/>
     <el-table-column prop="description" label="描述"/>
     <el-table-column prop="createTime" label="创建时间"/>
     <el-table-column label="操作">
       <template #default="scope">
         <el-button link type="primary" size="small" @click.prevent="updateAuthority(scope.$index)">编辑</el-button>
+        <el-button link type="primary" size="small" @click.prevent="removeAuthority(scope.$index)">删除</el-button>
       </template>
     </el-table-column>
   </el-table>
@@ -101,6 +103,15 @@ export default {
           this.listAuthorities()
           this.visible = false
           ElMessage.success("更新成功")
+        }
+      )
+    },
+
+    removeAuthority(index){
+      roleApi.removeAuthority(this.authorities[index].id).then(
+        ()=>{
+          this.listAuthorities()
+          ElMessage.success("删除成功")
         }
       )
     }

@@ -31,6 +31,13 @@ export default{
     })
   },
 
+  removeRole(roleId){
+    return request({
+      url: "/admin/roles/" + roleId,
+      method: "DELETE"
+    })
+  },
+
   listAuthorities(){
     return request({
       url: "/admin/roles/authorities",
@@ -43,6 +50,13 @@ export default{
       url: "/admin/roles/authorities",
       method: "PUT",
       data: authority
+    })
+  },
+
+  removeAuthority(authorityId){
+    return request({
+      url: "/admin/roles/authorities/" + authorityId,
+      method: "DELETE"
     })
   }
 }

@@ -13,6 +13,17 @@
         <el-input v-model="user.username" />
       </el-form-item>
 
+      <el-form-item label="性别">
+        <el-select v-model="user.gender" placeholder="选择角色">
+          <el-option label="男" :value="true" />
+          <el-option label="女" :value="false" />
+        </el-select>
+      </el-form-item>
+
+      <el-form-item label="邮箱">
+        <el-input name="email" v-model="user.email" placeholder="修改邮箱"/>
+      </el-form-item>
+
       <el-form-item label="密码">
         <el-input v-model="user.password" type="password" placeholder="修改密码"/>
       </el-form-item>
@@ -58,6 +69,8 @@ export default {
         roleId: null,
         enable: false,
         password: "",
+        email: "",
+        gender: null,
         createTime: null,
         updateTime: null,
         avatarUrl: null
@@ -96,6 +109,8 @@ export default {
         id: this.user.id,
         roleId: this.user.roleId,
         enable: this.user.enable,
+        gender: this.user.gender,
+        email: this.user.email,
         password: this.user.password ? this.user.password : null
       }
       userApi.updateUser(user).then(

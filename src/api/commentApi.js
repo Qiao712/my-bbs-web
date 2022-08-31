@@ -17,6 +17,14 @@ export default{
     })
   },
 
+  listMyComments(params){
+    return request({
+      url: "/comments/my",
+      method: "DELETE",
+      params
+    })
+  },
+
   removeMyComment(commentId){
     return request({
       url: "/comments/" + commentId,

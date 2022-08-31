@@ -4,14 +4,18 @@
       <div class="info">
         <!--用户信息-->
         <div class="user-info" v-if="currentUser">
-          <el-avatar class="big-avatar" v-if="currentUser.avatarUrl" shape="square" :size="80" :src="currentUser.avatarUrl"/>
-          <el-avatar class="big-avatar" v-if="!currentUser.avatarUrl" shape="square" :size="80" src="../assets/default-avatar.png"/>
+          <img class="big-avatar" v-if="currentUser.avatarUrl" :src="currentUser.avatarUrl"/>
+          <img class="big-avatar" v-if="!currentUser.avatarUrl" src="../../assets/default-avatar.png"/>
           
           <div>
             <div class="username-text">
               {{currentUser.username}}
             </div>
           </div>
+
+          <!--修改头像-->
+          <el-button @click="setAvatar" link style="margin: 50px">修改头像</el-button>
+          <input id="avatarInput" hidden type="file" @change="uploadAvatar" accept="image/*"/>  
         </div>
       </div>
 
@@ -27,6 +31,7 @@
 </template>
 
 <script>
+import { ElMessage } from 'element-plus/lib/components'
 import userApi from "../../api/userApi"
 import PostsOfUser from "./PostsOfUser.vue"
 import FavoriteList from "./FavoriteList.vue"
@@ -66,6 +71,27 @@ export default {
 
     handleSelect(index){
       this.$router.push({path: '/user/' + this.currentUser.id + '/' + index})
+    },
+
+    //点击File Input
+    setAvatar(){
+      document.getElementById("avatarInput").click()
+    },
+
+    uploadAvatar(event){
+      //获取选择的文件
+      let files = event.target.files
+      
+      if(files && files.length > 0){
+        let formData = new FormData()
+        formData.append("file", files[0])
+        userApi.setUserAvatar(this.currentUser.id, formData).then(
+          ()=>{
+            this.currentUser.avatarUrl = URL.createObjectURL(files[0])
+            ElMessage.success("头像上传成功")
+          }
+        )
+      }
     }
   }
 }
@@ -89,8 +115,11 @@ export default {
 	align-items: center;
 }
 
-.el-avatar{
+.big-avatar{
 	margin: 10px;
+  border-radius: 5px;
+  width: 80px;
+  height: 80px;
 }
 
 .username-text{
