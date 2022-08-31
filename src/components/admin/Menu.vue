@@ -11,6 +11,7 @@
       </template>
       
       <el-menu-item index="/admin/statistic">统计</el-menu-item>
+      <el-menu-item index="/admin/advertisements">广告列表</el-menu-item>
     </el-sub-menu>
 
 

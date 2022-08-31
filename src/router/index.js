@@ -2,13 +2,14 @@ import {createRouter, createWebHistory} from 'vue-router'
 import IndexView from "../components/IndexView"
 import AdminView from "../components/admin/AdminView"
 import Register from "../components/user/RegisterView"
-import LoginView from "../components/admin/LoginView"
+import LoginView from "../components/LoginView"
 import Users from "../components/admin/Users"
 import Roles from "../components/admin/Roles"
 import Posts from "../components/admin/Posts"
 import Statistic from "../components/admin/Statistic"
 import Comments from "../components/admin/Comments"
 import Authorities from "../components/admin/Authorities"
+import Advertisements from "../components/admin/Advertisements"
 import UserEdit from "../components/admin/UserEdit"
 import PostEdit from "../components/post/PostEdit"
 import PostView from "../components/post/PostView"
@@ -25,6 +26,7 @@ import TestDOMPurify from "../components/test/TestDOMPurify"
 let routes = [
   //用户端
   { path: '/', component: IndexView},
+  { path: '/login', component: LoginView},
   { path: '/register', component: Register},
   { path: '/forum/:forumId', component: ForumView},
   { path: '/post/edit', component: PostEdit},
@@ -36,7 +38,6 @@ let routes = [
   { path: '/user', component: UserSpace},
 
   //后台管理
-  { path: '/admin/login', component: LoginView},
   { path: '/admin',
     component: AdminView,
     children: 
@@ -48,7 +49,8 @@ let routes = [
       { path: 'posts', component: Posts},
       { path: 'comments', component: Comments},
       { path: 'statistic', component: Statistic},
-      { path: 'authorities', component: Authorities}
+      { path: 'authorities', component: Authorities},
+      { path: 'advertisements', component: Advertisements},
     ]
   },
 

@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
-    <img src="https://element-plus.gitee.io/images/element-plus-logo.svg" class="logo"/>
-    <p>论坛系统 后台管理</p>
+    <img src="../../assets/logo.png" class="logo"/>
+    <p>后台管理</p>
   </div>
 </template>
 
@@ -15,9 +15,13 @@ export default {
 .nav{
   display:flex;
   align-items:center;
+
+  font-size: 20px;
 }
 
 .logo{
-  height: 90%;
+  height: 30px;
+  margin: 10px;
+  /* height: 90%; */
 }
 </style>

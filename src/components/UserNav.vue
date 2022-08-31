@@ -1,7 +1,7 @@
 <template>
   <div v-if="visible" class="user-nav">
-    <div class="logo" @click="$router.push({path: '/'})">
-      没有名字的论坛
+    <div @click="$router.push({path: '/'})">
+      <img class="logo" src="../assets/logo.png"/>
     </div> 
 
     <!--搜索框-->
@@ -106,6 +106,8 @@ export default {
 }
 
 .logo{
+  height: 20px;
+  width: 200px;
   margin-left: 20px;
 }
 

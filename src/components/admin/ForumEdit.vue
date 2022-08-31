@@ -1,7 +1,11 @@
 <template>
   <el-form label-width="100px">
     <el-form-item label="Logo">
-      <ForumLogoUploader :forumId="forum.id" :logoUrl="forum.logoUrl" :refresh="refresh"/>
+      <img v-if="forum.logoUrl" :src="forum.logoUrl" class="avatar" />
+      <img v-if="!forum.logoUrl" src="../../assets/default-forum-logo.png" class="avatar"/>
+
+      <el-button @click="setLogo" style="margin: 50px">修改Logo</el-button>
+      <input id="imageInput" hidden type="file" @change="uploadAvatar" accept="image/*"/>
     </el-form-item>
 
     <el-form-item label="板块名">
@@ -25,16 +29,11 @@
 </template>
 
 <script>
-import ForumLogoUploader from './ForumLogoUploader'
 import { ElMessage } from 'element-plus/lib/components'
 import forumApi from "../../api/forumApi"
 
 export default {
   name: "ForumEdit",
-
-  components: {
-    ForumLogoUploader
-  },
 
   props:[
     "originForum",
@@ -86,11 +85,46 @@ export default {
           this.categories = response.data
         }
       )
-    }
+    },
+
+    //点击File Input
+    setLogo(){
+      document.getElementById("imageInput").click()
+    },
+
+    uploadAvatar(event){
+      //获取选择的文件
+      let files = event.target.files
+      
+      if(files && files.length > 0){
+        let formData = new FormData()
+        formData.append("file", files[0])
+        forumApi.setForumLogo(this.forum.id, formData).then(
+          ()=>{
+            this.forum.id = URL.createObjectURL(files[0])
+            if(this.refresh) this.refresh()
+            ElMessage.success("Logo设置成功")
+          }
+        )
+      }
+    },
   }
 }
 </script>
 
-<style>
+<style scoped>
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
 
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+
+  border-color: var(--el-color-primary);
+}
 </style>

@@ -1,32 +1,32 @@
 <template>
-  <div id="login-frame">
-    <el-row justify="center" >
-      <el-col :sm="24" :md="8" class="radius">
-        <h1 style="font-family: sans-serif">论坛系统后台管理</h1>
+  <div class="login">
+    <div class="radius" style="width: 400px">
+      <img class="logo" src="../assets/logo.png">
 
-        <el-form :model="form" label-width="60px">
-          <el-form-item label="用户名">
-            <el-input v-model="credential.username" placeholder="请输入用户名" name="username"></el-input>
-          </el-form-item>
-          <el-form-item label="密码">
-            <el-input v-model="credential.password" type="password" placeholder="请输入密码" name="password"></el-input>
-          </el-form-item>
-          <el-form-item>
-            <el-checkbox v-model="credential.rememberMe" name="remember-me">记住我</el-checkbox>
-          </el-form-item>
-          <el-form-item>
-            <el-button type="primary" @click="login">登录</el-button>
-            <el-button type="primary" @click="$router.push('/register')">注册</el-button>
-          </el-form-item>
-        </el-form>
-      </el-col>
-    </el-row>
+      <el-form label-width="60px">
+        <el-form-item label="用户名">
+          <el-input v-model="credential.username" placeholder="请输入用户名" name="username"></el-input>
+        </el-form-item>
+        <el-form-item label="密码">
+          <el-input v-model="credential.password" type="password" placeholder="请输入密码" name="password"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-checkbox v-model="credential.rememberMe" name="remember-me">记住我</el-checkbox>
+        </el-form-item>
+        <el-form-item>
+          <el-button type="primary" @click="login">登录</el-button>
+          <el-button type="primary" @click="$router.push('/register')">注册</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
+
+    <div/>
   </div>
 </template>
 
 <script>
-import userApi from "../../api/userApi"
-import store from "../../store"
+import userApi from "../api/userApi"
+import store from "../store"
 import { ElMessage } from 'element-plus'
 
 export default {
@@ -81,13 +81,20 @@ export default {
 </script>
   
 <style scoped>
+.login{
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .radius {
   text-align: center;
   border: 2px solid var(--el-border-color-base);
   border-radius: 5px;
   margin-top: 10px;
-  padding: 10px;
-  background-color:rgba(189, 219, 245, 0.921);
+  padding: 25px;
+  background-color:azure;
   color:rgb(125, 125, 125);
 }
 </style>

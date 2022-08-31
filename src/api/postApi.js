@@ -1,12 +1,12 @@
 import request from "./request"
 
 export default{
-  uploadPicture(file){
+  uploadImage(file){
     let form = new FormData()
-    form.append("picture", file)
+    form.append("image", file)
     
     return request({
-      url: "/posts/pictures",
+      url: "/posts/images",
       method: "POST",
       data: form
     })

@@ -100,7 +100,7 @@ export default {
 
           // 上传
           async customUpload(file, insertFn){
-            postApi.uploadPicture(file).then(
+            postApi.uploadImage(file).then(
               (response)=>{
                 let url = response.data
                 insertFn(url, "", "")

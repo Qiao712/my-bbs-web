@@ -1,5 +1,5 @@
 <template>
-  <el-button @click="roleAdding = true">添加角色</el-button>
+  <el-button style="margin: 10px" @click="roleAdding = true">添加角色</el-button>
 
   <el-table :data="roles">
     <el-table-column prop="name" label="角色名"/>
@@ -145,7 +145,3 @@ export default {
   }
 }
 </script>
-
-<style>
-
-</style>

@@ -2,7 +2,11 @@
   <div style="margin-top: 20px; width: 90%">
     <el-form label-width="120px">
       <el-form-item label="头像">
-        <AvatarUploader :userId="user.id" :avatarUrl="user.avatarUrl"></AvatarUploader>
+        <img v-if="user.avatarUrl" :src="user.avatarUrl" class="avatar" />
+        <img v-if="!user.avatarUrl" src="../../assets/default-avatar.png" class="avatar" />
+
+        <el-button @click="setAvatar" style="margin: 50px">修改头像</el-button>
+        <input id="avatarInput" hidden type="file" @change="uploadAvatar" accept="image/*"/>
       </el-form-item>
 
       <el-form-item label="用户名">
@@ -42,7 +46,6 @@
 <script>
 import userApi from "../../api/userApi"
 import roleApi from "../../api/roleApi"
-import AvatarUploader from "./AvatarUploader.vue"
 import { ElMessage } from 'element-plus'
 
 export default {
@@ -63,13 +66,9 @@ export default {
     }
   },
 
-  components: {
-    AvatarUploader
-  },
-
   mounted(){
     this.getUser()
-    this.getRoles()
+    this.listRoles()
   },
 
   methods:{
@@ -84,8 +83,8 @@ export default {
       }
     },
 
-    getRoles(){
-      roleApi.getRoles().then(
+    listRoles(){
+      roleApi.listRoles().then(
         response => {
           this.roles = response.data
         }
@@ -109,10 +108,44 @@ export default {
         }
       )
     },
+
+    //点击File Input
+    setAvatar(){
+      document.getElementById("avatarInput").click()
+    },
+
+    uploadAvatar(event){
+      //获取选择的文件
+      let files = event.target.files
+      
+      if(files && files.length > 0){
+        let formData = new FormData()
+        formData.append("file", files[0])
+        userApi.setUserAvatar(this.user.id, formData).then(
+          ()=>{
+            this.user.avatarUrl = URL.createObjectURL(files[0])
+            ElMessage.success("头像上传成功")
+          }
+        )
+      }
+    },
   }
 }
 </script>
 
 <style scoped>
+.avatar {
+  width: 178px;
+  height: 178px;
+  display: block;
 
+  border: 1px dashed var(--el-border-color);
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+
+  border-color: var(--el-color-primary);
+}
 </style>
