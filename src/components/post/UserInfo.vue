@@ -31,7 +31,6 @@ export default {
       () => store.state.currentUser,
       () => {
         if(store.state.currentUser)
-          console.log(store.state.currentUser.id)
           this.currentUserId = store.state.currentUser.id
       },
       { immediate: true }

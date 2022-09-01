@@ -98,8 +98,17 @@ export default {
       }
       messageApi.sendPrivateMessage(data).then(
         ()=>{
-          this.newMessages.push({message: this.text, createTimeLocalString: new Date().toLocaleString()})
+          //临时显示"我"刚发出的消息
+          this.newMessages.push(
+            { 
+              content: {text: this.text}, 
+              createTimeLocalString: new Date().toLocaleString() 
+            }
+          )
           this.text = ""
+        }
+      ).finally(
+        ()=>{
           this.sending = false
         }
       )
