@@ -3,28 +3,30 @@
     <el-col :xs="24" :sm="24" :md="20" :lg="14" :xl="12">
       <div class="info">
         <!--用户信息-->
-        <div class="user-info" v-if="currentUser">
-          <img class="big-avatar" v-if="currentUser.avatarUrl" :src="currentUser.avatarUrl"/>
-          <img class="big-avatar" v-if="!currentUser.avatarUrl" src="../../assets/default-avatar.png"/>
+        <div class="user-info" v-if="user">
+          <img class="big-avatar" v-if="user.avatarUrl" :src="user.avatarUrl"/>
+          <img class="big-avatar" v-if="!user.avatarUrl" src="../../assets/default-avatar.png"/>
           
           <div>
             <div class="username-text">
-              {{currentUser.username}}
+              {{user.username}}
             </div>
           </div>
 
           <!--修改头像-->
-          <el-button @click="setAvatar" link style="margin: 50px">修改头像</el-button>
-          <input id="avatarInput" hidden type="file" @change="uploadAvatar" accept="image/*"/>  
+          <div v-if="currentUser.id == user.id">
+            <el-button @click="setAvatar" link style="margin: 50px">修改头像</el-button>
+            <input id="avatarInput" hidden type="file" @change="uploadAvatar" accept="image/*"/>  
+          </div>
         </div>
       </div>
 
       <!--功能选择菜单-->
-      <el-tabs v-model="activeName" v-if="currentUser.id">
-        <el-tab-pane label="我的贴子" name="1"><PostsOfUser :username="currentUser.username"/></el-tab-pane>
-        <el-tab-pane label="我的评论" name="2"><CommentsOfUser :username="currentUser.username"/></el-tab-pane>
-        <el-tab-pane label="收藏" name="3"><FavoriteList :userId="currentUser.id"/></el-tab-pane>
-        <el-tab-pane label="关注" name="4"><FollowingList :userId="currentUser.id"/></el-tab-pane>
+      <el-tabs v-model="activeName" v-if="user.id">
+        <el-tab-pane label="我的贴子" name="1"><PostsOfUser :username="user.username"/></el-tab-pane>
+        <el-tab-pane label="我的评论" name="2"><CommentsOfUser :username="user.username"/></el-tab-pane>
+        <el-tab-pane label="收藏" name="3" v-if="currentUserId != user.id"><FavoriteList :userId="user.id"/></el-tab-pane>  <!--不为其他用户展示-->
+        <el-tab-pane label="关注" name="4" v-if="currentUserId != user.id"><FollowingList :userId="user.id"/></el-tab-pane> <!--不为其他用户展示-->
       </el-tabs>
     </el-col>
   </el-row>
@@ -50,27 +52,42 @@ export default {
 
   data(){
     return{
-      currentUser: {},
+      user: {
+        id: null
+      },
+
+      //当前登录的用户信息
+      currentUser: {
+        id: null
+      },
       
       activeName: "1"
     }
   },
 
   created(){
+    this.getUser()
     this.getCurrentUser()
   },
 
   methods:{
+    getUser(){
+      this.user.id = this.$route.params.userId
+      if(! this.user.id) return
+
+      userApi.getUser(this.user.id).then(
+        (response)=>{
+          this.user = response.data
+        }
+      )
+    },
+
     getCurrentUser(){
       userApi.getCurrentUser().then(
         (response)=>{
           this.currentUser = response.data
         }
       )
-    },
-
-    handleSelect(index){
-      this.$router.push({path: '/user/' + this.currentUser.id + '/' + index})
     },
 
     //点击File Input
@@ -85,9 +102,9 @@ export default {
       if(files && files.length > 0){
         let formData = new FormData()
         formData.append("file", files[0])
-        userApi.setUserAvatar(this.currentUser.id, formData).then(
+        userApi.setUserAvatar(this.user.id, formData).then(
           ()=>{
-            this.currentUser.avatarUrl = URL.createObjectURL(files[0])
+            this.user.avatarUrl = URL.createObjectURL(files[0])
             ElMessage.success("头像上传成功")
           }
         )

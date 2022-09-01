@@ -1,9 +1,7 @@
 <template>
   <div class="comment" v-if="comment">
     <div class="user-bar">
-      <img class="big-avatar" v-if="comment.author.avatarUrl" :src="comment.author.avatarUrl"/>
-      <img class="big-avatar" v-if="! comment.author.avatarUrl" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"/>
-      <p class="small-text">{{comment.author.username}}</p>
+      <UserInfo :user="comment.author"/>
     </div>
 
     <div class="comment-content">
@@ -50,6 +48,7 @@
 <script>
 import commentApi from "../../api/commentApi"
 import SubComment from "./SubComment"
+import UserInfo from './UserInfo.vue'
 import { ElMessage } from 'element-plus'
 import htmlUtil from '../../util/htmlUtil'
 
@@ -62,7 +61,8 @@ export default {
   ],
 
   components:{
-    SubComment
+    SubComment,
+    UserInfo
   },
 
   data(){

@@ -34,6 +34,10 @@
           <!--弹出框中展示用户信息-->
           <div>
             欢迎 {{state.currentUser.username}} 点击进入用户空间
+
+            <br/>
+
+            <el-button link @click="logout">退出登录</el-button>
           </div>
         </el-popover>
       </div>
@@ -41,15 +45,17 @@
       <!--无法获取当前用户信息则，显示登录、注册-->
       <div v-if="!state.currentUser" class="user-info">
         <el-button type="info" link @click="$router.push({path: '/login'})" class="color-white">登录</el-button>
-        <el-button type="info" link @click="test" class="color-white">注册</el-button>
+        <el-button type="info" link @click="$router.push({path: '/register'})" class="color-white">注册</el-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { ElMessage } from 'element-plus/lib/components'
 import store from "../store"
 import {Message, Bell} from '@element-plus/icons-vue'
+import userApi from '../api/userApi'
 
 export default {
   name: "UserNav",
@@ -92,6 +98,18 @@ export default {
 
     getMessageCount(){
       store.refreshMessageCount()
+    },
+
+    logout(){
+      userApi.logout().then(
+        ()=>{
+          localStorage.removeItem("Token")
+          sessionStorage.removeItem("Token")
+          this.$router.push({path: "/"})
+          store.setCurrentUser(null)
+          ElMessage.success("登出成功")
+        }
+      )
     }
   }
 }

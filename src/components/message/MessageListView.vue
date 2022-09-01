@@ -1,5 +1,7 @@
 <template>
   <ViewContainer>
+    <el-empty description="暂无消息" v-if="!message || messages.length == 0"/>
+
     <div class="message" v-for="message in messages" :key="message.id">
       <!--评论回复消息-->
       <div v-if="message.type.toLowerCase() == 'reply'">

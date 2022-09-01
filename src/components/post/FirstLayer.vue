@@ -1,9 +1,7 @@
 <template>
   <div class="comment" v-if="post">
     <div class="user-bar">
-      <img class="big-avatar" v-if="post.author.avatarUrl" :src="post.author.avatarUrl"/>
-      <img class="big-avatar" v-if="! post.author.avatarUrl" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"/>
-      <p class="small-text">{{post.author.username}}</p>
+      <UserInfo :user="post.author"/>
     </div>
 
     <div class="post-content">
@@ -30,10 +28,15 @@
 import { ElMessage } from 'element-plus/lib/components'
 import postApi from '../../api/postApi'
 import htmlUtil from '../../util/htmlUtil'
+import UserInfo from './UserInfo.vue'
 
 export default {
   name: "ReplyView",
   props: ["post"],
+
+  components:{
+    UserInfo
+  },
 
   data(){
     return {

@@ -1,7 +1,7 @@
 import {createRouter, createWebHistory} from 'vue-router'
 import IndexView from "../components/IndexView"
 import AdminView from "../components/admin/AdminView"
-import Register from "../components/user/RegisterView"
+import RegisterView from "../components/user/RegisterView"
 import LoginView from "../components/LoginView"
 import Users from "../components/admin/Users"
 import Roles from "../components/admin/Roles"
@@ -27,7 +27,7 @@ let routes = [
   //用户端
   { path: '/', component: IndexView},
   { path: '/login', component: LoginView},
-  { path: '/register', component: Register},
+  { path: '/register', component: RegisterView},
   { path: '/forum/:forumId', component: ForumView},
   { path: '/post/edit', component: PostEdit},
   { path: '/post/:postId', component: PostView},
@@ -35,7 +35,7 @@ let routes = [
   { path: '/chat/:userId', component: ConversationView},
   { path: '/conversations', component: ConversationListView},
   { path: '/messages', component: MessageListView},
-  { path: '/user', component: UserSpace},
+  { path: '/user/:userId', component: UserSpace},
 
   //后台管理
   { path: '/admin',

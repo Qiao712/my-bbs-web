@@ -1,10 +1,19 @@
 <template>
   <div class="sub-comment">
-    <!--头像-->
-    <div style="text-align: center">
-      <el-image class="avatar" :fit="fill" shape="square" v-if="!comment.author.avatarUrl" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"/>
-      <el-image class="avatar" :fit="fill" shape="square" v-if="comment.author.avatarUrl" :src="comment.author.avatarUrl"/>
-    </div>
+    <!--头像, 鼠标悬浮时，弹出大头像和按钮-->
+    <el-popover
+      style="text-align: center"
+      placement="top-start"
+      :width="100"
+      trigger="hover"
+    >
+      <template #reference>
+        <img class="avatar" v-if="!comment.author.avatarUrl" src="../../assets/default-avatar.png"/>
+        <img class="avatar" v-if="comment.author.avatarUrl" :src="comment.author.avatarUrl"/>
+      </template>
+
+      <UserInfo :user="comment.author"/>
+    </el-popover>
 
     <!--回复-->
     <div>
@@ -37,13 +46,20 @@
 <script>
 import commentApi from "../../api/commentApi"
 import { ElMessage } from 'element-plus'
+import UserInfo from './UserInfo.vue'
 
 export default {
   name: "SubComment",
+
   props: [
     "comment",
     "refresh"
   ],
+
+  components:{
+    UserInfo
+  },
+
   data(){
     return {
       //回复
@@ -119,6 +135,8 @@ export default {
 
 .avatar{
   margin: 2px;
+  width: 32px;
+  height: 32px;
 }
 
 .bottom-bar{

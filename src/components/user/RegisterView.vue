@@ -23,7 +23,9 @@
 </template>
 
 <script>
+import { ElMessage } from 'element-plus/lib/components'
 import ViewContainer from "../common/ViewContainer.vue"
+import userApi from "../../api/userApi"
 
 export default {
   name: 'RegisterView',
@@ -42,18 +44,20 @@ export default {
   methods:{
     register(){
       if(this.password != this.checkPassword){
-        // showSuccessMessage("两次输入的密码不一致，请重新输入")
+        ElMessage.warning("两次输入的密码不一致,请重新输入!")
         return
       }
-      let registerRequest = {
+
+      let params = {
         username: this.username,
         password: this.password
       }
 
-      console.info(registerRequest)
-      // userApi.register(registerRequest).then(
-      //   this.$router.push({name: "login"})
-      // )
+      userApi.register(params).then(
+        ()=>{
+          this.$router.push({path: "/login"})
+        }
+      )
     },
   }
 }

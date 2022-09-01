@@ -17,13 +17,15 @@ const store = {
 
     //刷新未读消息数量
     refreshMessageCount(){
-        messageApi.getUnacknowledgedPrivateMessageCount().then(
-            response => this.state.privateMessageCount = response.data
-        )
-
-        messageApi.getUnacknowledgedSystemMessageCount().then(
-            response => this.state.systemMessageCount = response.data
-        )
+        if(this.state.currentUser){
+            messageApi.getUnacknowledgedPrivateMessageCount().then(
+                response => this.state.privateMessageCount = response.data
+            )
+    
+            messageApi.getUnacknowledgedSystemMessageCount().then(
+                response => this.state.systemMessageCount = response.data
+            )
+        }
     }
 }
 export default store

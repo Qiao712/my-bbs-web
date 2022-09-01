@@ -1,5 +1,7 @@
 <template>
   <ViewContainer>
+    <el-empty description="暂无会话" v-if="!conversations || conversations.length == 0"/>
+
     <div class="conversation" v-for="conversation in conversations" :key="conversation.id"  @click="chat(conversation.userId)">
       <div class="user-bar">
         <img class="avatar" v-if="conversation.avatarUrl" :src="conversation.avatarUrl"/>
