@@ -179,42 +179,19 @@ export default {
 <style scoped>
 @import "../../assets/css/edit-content.css";
 
-.editor-content-view{
+.comment{
+  display: grid;
+  grid-template-columns: 100px auto;
   min-height: 100px;
 }
 
-@media (max-device-width: 500px) {
-  .comment{
-    display: grid;
-    grid-template-rows: 10% 90%;
-  }
-
-  .big-avatar{
-    margin: 0.5rem;
-    height: 4rem;
-    width: 4rem;
-  }
-
-  .user-bar{
-    display: flex;
-    align-items: center;
-  }
+.big-avatar{
+  margin-top: 0.5rem;
+  width: 90%;
 }
 
-@media (min-device-width: 500px){
-  .comment{
-    display: grid;
-    grid-template-columns: 10% 90%;
-  }
-
-  .big-avatar{
-    margin-top: 0.5rem;
-    width: 90%;
-  }
-
-  .user-bar{
-    text-align: center;
-  }
+.user-bar{
+  text-align: center;
 }
 
 .comment-content{

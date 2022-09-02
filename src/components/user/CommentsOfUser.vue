@@ -68,10 +68,9 @@ export default {
       let params = {
         pageNo: this.pageNo,
         pageSize: this.pageSize,
-        authorUsername: this.username
       }
 
-      commentApi.removeMyComment(params).then(
+      commentApi.listMyComments(params).then(
         response=>{
           this.pageNo = response.data.current
           this.comments = response.data.records

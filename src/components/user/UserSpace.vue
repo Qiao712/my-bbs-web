@@ -23,10 +23,11 @@
 
       <!--功能选择菜单-->
       <el-tabs v-model="activeName" v-if="user.id">
-        <el-tab-pane label="我的贴子" name="1"><PostsOfUser :username="user.username"/></el-tab-pane>
-        <el-tab-pane label="我的评论" name="2"><CommentsOfUser :username="user.username"/></el-tab-pane>
-        <el-tab-pane label="收藏" name="3" v-if="currentUserId != user.id"><FavoriteList :userId="user.id"/></el-tab-pane>  <!--不为其他用户展示-->
-        <el-tab-pane label="关注" name="4" v-if="currentUserId != user.id"><FollowingList :userId="user.id"/></el-tab-pane> <!--不为其他用户展示-->
+        <el-tab-pane label="我的贴子" name="1"><PostsOfUser v-if="user.username" :username="user.username"/></el-tab-pane>
+
+        <el-tab-pane label="我的评论" name="2" v-if="currentUser.id == user.id"><CommentsOfUser v-if="user.username" :username="user.username"/></el-tab-pane> <!--不为其他用户展示-->
+        <el-tab-pane label="收藏" name="3" v-if="currentUser.id == user.id"><FavoriteList :userId="user.id"/></el-tab-pane>  <!--不为其他用户展示-->
+        <el-tab-pane label="关注" name="4" v-if="currentUser.id == user.id"><FollowingList :userId="user.id"/></el-tab-pane> <!--不为其他用户展示-->
       </el-tabs>
     </el-col>
   </el-row>

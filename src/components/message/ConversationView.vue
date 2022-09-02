@@ -89,7 +89,7 @@ export default {
 
     //发送消息
     sendMessage(){
-      if(this.sending || this.messages.length == "") return
+      if(this.sending || this.text.length == "") return
 
       this.sending = true //发送状态
       let data = {

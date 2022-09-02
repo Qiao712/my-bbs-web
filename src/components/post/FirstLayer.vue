@@ -86,46 +86,21 @@ export default {
 </script>
 
 <style scoped>
-.editor-content-view{
+.comment{
+  display: grid;
+  grid-template-columns: 100px auto;
   min-height: 150px;
 }
 
-/* 大屏 */
-@media (max-device-width: 499px) {
-  .comment{
-    display: grid;
-    grid-template-rows: 10% 90%;
-  }
-
-  .big-avatar{
-    margin: 5px;
-    height: 40px;
-    width: 40px;
-  }
-
-  .user-bar{
-    display: flex;
-    align-items: center;
-  }
+.big-avatar{
+  margin-top: 5px;
+  width: 90%;
 }
 
-/* 小屏 */
-@media (min-device-width: 500px){
-  .comment{
-    display: grid;
-    grid-template-columns: 10% 90%;
-  }
-
-  .big-avatar{
-    margin-top: 5px;
-    width: 90%;
-  }
-
-  .user-bar{
-    text-align: center;
-  }
+.user-bar{
+  text-align: center;
 }
-
+  
 .post-content{
   color: var(--el-text-color-regular);
   min-height: 150px;

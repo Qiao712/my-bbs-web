@@ -25,9 +25,9 @@
         <el-popover placement="bottom" :width="200" trigger="hover">
           <template #reference>
             <!--用户头像-->    
-            <div @click="$router.push({path: '/user'})">
-              <el-avatar v-if="state.currentUser.avatarUrl" :size="40" :src="state.currentUser.avatarUrl"/>
-              <el-avatar v-if="!state.currentUser.avatarUrl" :size="40" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"/>
+            <div @click="$router.push({path: '/user/' + state.currentUser.id})">
+              <img class="avatar" v-if="state.currentUser.avatarUrl" :src="state.currentUser.avatarUrl"/>
+              <img class="avatar" v-if="!state.currentUser.avatarUrl" src="../assets/default-avatar.png"/>
             </div>
           </template>
           
@@ -143,6 +143,12 @@ export default {
 .search-bar{
   margin: 10px;
   width: 20%;
+}
+
+.avatar{
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
 }
 
 </style>

@@ -20,7 +20,7 @@ export default{
   listMyComments(params){
     return request({
       url: "/comments/my",
-      method: "DELETE",
+      method: "GET",
       params
     })
   },
