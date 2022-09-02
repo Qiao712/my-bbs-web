@@ -1,6 +1,6 @@
 <template>
   <ViewContainer>
-    <el-empty description="暂无消息" v-if="!message || messages.length == 0"/>
+    <el-empty description="暂无消息" v-if="!messages || messages.length == 0"/>
 
     <div class="message" v-for="message in messages" :key="message.id">
       <!--评论回复消息-->
