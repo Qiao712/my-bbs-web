@@ -3,6 +3,7 @@
  */
 import {reactive} from "vue"
 import messageApi from "./api/messageApi"
+import chatApi from "./api/chatApi"
 
 const store = {
     state: reactive({
@@ -18,7 +19,7 @@ const store = {
     //刷新未读消息数量
     refreshMessageCount(){
         if(this.state.currentUser){
-            messageApi.getUnacknowledgedPrivateMessageCount().then(
+            chatApi.getUnacknowledgedPrivateMessageCount().then(
                 response => this.state.privateMessageCount = response.data
             )
     

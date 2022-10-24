@@ -10,9 +10,9 @@
         <el-tag v-if="conversation.unacknowledgedCount!=0">未读: {{conversation.unacknowledgedCount}}</el-tag>
       </div>
 
-      <div class="mid-text">{{conversation.latestMessage}}</div>
+      <div class="mid-text">{{conversation.latestMessage.content}}</div>
 
-      <div class="time-text">{{conversation.createTime}}</div>
+      <div class="time-text">{{conversation.latestMessage.createTime}}</div>
     </div>
 
     <el-pagination
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import messageApi from "../../api/messageApi"
+import chatApi from "../../api/chatApi"
 import ViewContainer from "../common/ViewContainer.vue"
 
 export default {
@@ -55,7 +55,7 @@ export default {
 
   methods: {
     listConversations(){
-      messageApi.listConversations(this.params).then(
+      chatApi.listConversations(this.params).then(
         (response)=>{
           this.params.pageNo = response.data.current
           this.total = response.data.total
