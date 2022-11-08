@@ -86,7 +86,7 @@ export default {
 
       let params = {
         pageSize: this.pageSize,
-        pageNo: this.postNo,
+        pageNo: this.pageNo,
         forumId: this.forumId,
         orderBy: this.orderBy
       }

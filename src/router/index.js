@@ -20,7 +20,6 @@ import PostSearchView from "../components/post/PostSearchView"
 import ConversationView from "../components/message/ConversationView"
 import ConversationListView from "../components/message/ConversationListView"
 import MessageListView from "../components/message/MessageListView"
-import ChatRoomView from "../components/message/ChatRoomView"
 import TestEdit from "../components/test/TestEdit"
 import TestDOMPurify from "../components/test/TestDOMPurify"
 
@@ -37,7 +36,6 @@ let routes = [
   { path: '/conversations', component: ConversationListView},
   { path: '/messages', component: MessageListView},
   { path: '/user/:userId', component: UserSpace},
-  { path: '/chatroom', component: ChatRoomView},
 
   //后台管理
   { path: '/admin',
