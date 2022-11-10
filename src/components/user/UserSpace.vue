@@ -36,6 +36,8 @@
 <script>
 import { ElMessage } from 'element-plus/lib/components'
 import userApi from "../../api/userApi"
+import fileApi from "../../api/fileApi"
+
 import PostsOfUser from "./PostsOfUser.vue"
 import FavoriteList from "./FavoriteList.vue"
 import CommentsOfUser from "./CommentsOfUser.vue"
@@ -101,12 +103,16 @@ export default {
       let files = event.target.files
       
       if(files && files.length > 0){
-        let formData = new FormData()
-        formData.append("file", files[0])
-        userApi.setUserAvatar(this.user.id, formData).then(
-          ()=>{
-            this.user.avatarUrl = URL.createObjectURL(files[0])
-            ElMessage.success("头像上传成功")
+        fileApi.uploadUserAvatar(files[0]).then(
+          (response)=>{
+            let fileId = response.data.id
+            
+            userApi.setUserAvatar(this.user.id, fileId).then(
+              ()=>{
+                this.user.avatarUrl = URL.createObjectURL(files[0])
+                ElMessage.success("头像上传成功")
+              }
+            )
           }
         )
       }

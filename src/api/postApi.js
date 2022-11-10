@@ -1,17 +1,6 @@
 import request from "./request"
 
 export default{
-  uploadImage(file){
-    let form = new FormData()
-    form.append("image", file)
-    
-    return request({
-      url: "/posts/images",
-      method: "POST",
-      data: form
-    })
-  },
-
   addPost(post){
     return request({
       url: "/posts",

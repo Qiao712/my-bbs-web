@@ -8,17 +8,6 @@ export default{
     })
   },
 
-  uploadAdvertisementImage(imageFile){
-    let form = new FormData()
-    form.append("image", imageFile)
-    
-    return request({
-      url: "/admin/sys/home-ads/images",
-      method: "POST",
-      data: form
-    })
-  },
-
   listAdvertisements(){
     return request({
       url: "/sys/home-ads",

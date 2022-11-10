@@ -31,6 +31,7 @@
 <script>
 import { ElMessage } from 'element-plus/lib/components'
 import forumApi from "../../api/forumApi"
+import fileApi from "../../api/fileApi"
 
 export default {
   name: "ForumEdit",
@@ -97,13 +98,17 @@ export default {
       let files = event.target.files
       
       if(files && files.length > 0){
-        let formData = new FormData()
-        formData.append("file", files[0])
-        forumApi.setForumLogo(this.forum.id, formData).then(
-          ()=>{
-            this.forum.id = URL.createObjectURL(files[0])
-            if(this.refresh) this.refresh()
-            ElMessage.success("Logo设置成功")
+        fileApi.uploadForumLogo(files[0]).then(
+          (response)=>{
+            let fileId = response.data.id
+            
+            forumApi.setForumLogo(this.forum.id, fileId).then(
+              ()=>{
+                this.forum.logoUrl = URL.createObjectURL(files[0])
+                if(this.refresh) this.refresh()
+                ElMessage.success("修改成功")
+              }
+            )
           }
         )
       }

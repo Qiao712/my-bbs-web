@@ -38,11 +38,13 @@ export default{
     })
   },
 
-  setUserAvatar(userId, form){
+  setUserAvatar(userId, avatarImageFileId){
     return request({
       url: "/users/" + userId + "/avatar",
-      method: "POST",
-      data: form
+      method: "PUT",
+      params: {
+        fileId: avatarImageFileId
+      }
     })
   },
 

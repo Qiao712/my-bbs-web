@@ -27,6 +27,7 @@
 <script>
 import { ElMessage } from 'element-plus/lib/components'
 import systemApi from "../../api/systemApi"
+import fileApi from "../../api/fileApi"
 
 export default {
   name: "AdvertisementAdd",
@@ -59,10 +60,9 @@ export default {
 			}
 
 			//上传图片后上传广告
-			systemApi.uploadAdvertisementImage(this.selectedImageFile).then(
+      fileApi.uploadAdvertisementImage(this.selectedImageFile).then(
 				(response)=>{
-					let imageFileId = response.data
-					this.advertisement.imageFileId = imageFileId
+					this.advertisement.imageFileId = response.data.id
 					this.selectedImageFile = null
 
 					//上传广告

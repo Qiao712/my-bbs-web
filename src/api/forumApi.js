@@ -55,11 +55,13 @@ export default{
     })
   },
 
-  setForumLogo(forumId, formData){
+  setForumLogo(forumId, logoImageFileId){
     return request({
       url: "/admin/forums/" + forumId + "/logo",
       method: "PUT",
-      data: formData
+      params: {
+        fileId: logoImageFileId
+      }
     })
   }
 }

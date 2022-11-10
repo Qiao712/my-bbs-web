@@ -28,7 +28,7 @@ import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { ElMessage } from 'element-plus'
 
 import commentApi from "../../api/commentApi"
-import postApi from "../../api/postApi"
+import fileApi from "../../api/fileApi"
 
 export default {
   components: { Editor, Toolbar },
@@ -80,9 +80,9 @@ export default {
 
           // 上传
           async customUpload(file, insertFn){
-            postApi.uploadImage(file).then(
+            fileApi.uploadPostImage(file).then(
               (response)=>{
-                let url = response.data
+                let url = response.data.url
                 insertFn(url, "", "")
               }
             )
