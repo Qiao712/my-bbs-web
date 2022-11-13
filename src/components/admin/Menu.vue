@@ -40,6 +40,16 @@
       <!-- <el-menu-item index="3-3">贴子审核</el-menu-item>
       <el-menu-item index="3-4">评论审核</el-menu-item> -->
     </el-sub-menu>
+
+    <!--文件管理-->
+    <el-sub-menu index="3">
+      <template #title>
+        <!-- <el-icon><location /></el-icon> -->
+        <span>文件管理</span>
+      </template>
+
+      <el-menu-item index="/admin/files">文件列表</el-menu-item>
+    </el-sub-menu>
   </el-menu>
 </template>
 

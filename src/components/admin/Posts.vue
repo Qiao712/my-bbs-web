@@ -13,7 +13,7 @@
         </el-form-item>
 
         <el-form-item label="作者">
-          <el-input v-model="queryForm.authorUsername" placeholder="请输入作者用户名"/>
+          <UserSelecter :callback="(selected)=>{this.queryForm.authorId = selected ? selected.id : null}"/>
         </el-form-item>
         
         <el-form-item>
@@ -60,10 +60,15 @@
 import { ElMessage } from 'element-plus/lib/components'
 import postApi from "../../api/postApi"
 import forumApi from "../../api/forumApi"
+import UserSelecter from "./UserSelecter.vue"
 import htmlUtil from "../../util/htmlUtil"
 
 export default {
   name: "Posts",
+
+  components: {
+    UserSelecter
+  },
 
   data(){
     return {
@@ -71,12 +76,12 @@ export default {
 
       queryForm:{
         forumId: null,
-        authorUsername: "",
+        authorId: null,
       },
 
       query:{
         forumId: null,
-        authorUsername: null,
+        authorId: null,
 
         pageSize: 10,
         pageNo: 1
@@ -136,11 +141,7 @@ export default {
 
     queryPosts(){
       this.query.forumId = this.queryForm.forumId
-      if(this.queryForm.authorUsername != "")
-        this.query.authorUsername = this.queryForm.authorUsername
-      else
-        this.query.authorUsername = null
-
+      this.query.authorId = this.queryForm.authorId
       this.listPosts()
     },
 

@@ -4,7 +4,7 @@
     <div class="head">
       <el-form :inline="true">
         <el-form-item label="评论者">
-          <el-input v-model="queryForm.authorUsername" placeholder="请输入评论者用户名"/>
+          <UserSelecter :callback="(selected)=>{this.queryForm.authorId = selected ? selected.id : null}"/>
         </el-form-item>
         
         <el-form-item>
@@ -50,20 +50,25 @@
 import { ElMessage } from 'element-plus/lib/components'
 import commentApi from "../../api/commentApi"
 import htmlUtil from "../../util/htmlUtil"
+import UserSelecter from "./UserSelecter.vue"
 
 export default {
   name: "Comments",
+
+  components: {
+    UserSelecter
+  },
 
   data(){
     return {
       forums: [],
 
       queryForm:{
-        authorUsername: "",
+        authorId: "",
       },
 
       query:{
-        authorUsername: null,
+        authorId: null,
 
         pageSize: 10,
         pageNo: 1
@@ -109,11 +114,7 @@ export default {
     },
 
     queryComments(){
-      if(this.queryForm.authorUsername != "")
-        this.query.authorUsername = this.queryForm.authorUsername
-      else
-        this.query.authorUsername = null
-
+      this.query.authorId = this.queryForm.authorId
       this.listComments()
     },
 

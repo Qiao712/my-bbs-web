@@ -44,4 +44,19 @@ export default {
       data: form
     })
   },
+
+  listFiles(query){
+    return request({
+      url: "/admin/files",
+      method: "GET",
+      params: query
+    })
+  },
+
+  removeFile(fileId){
+    return request({
+      url: "/admin/files/" + fileId,
+      method: "DELETE"
+    })
+  }
 }
