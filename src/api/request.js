@@ -4,7 +4,7 @@ import { ElMessage } from 'element-plus'
 //axios实例
 const service = axios.create({
   baseURL : "http://localhost:8081/api",
-  withCredentials: true
+  withCredentials: false
 })
 
 //request拦截器，在HEADER中添加token
@@ -23,41 +23,30 @@ let requestErrorIntercepter = error => {
   return Promise.reject(error)
 }
 
-//response拦截器
+//成功Response拦截器
 let responseIntercepter = response => {
-  let status = response.data.status
+  let code = response.data.code
   let message = response.data.message
 
-  //默认的错误处理: 若有消息，弹出提示框
-  if(status != 0 && message){
-    ElMessage({
-      message,
-      type: 'error',
-      duration: 2000,
-    })
-  }
-
-  switch(status){
-    //成功
-    case 0: break
-    
-    //无权访问
-    case 401: break
-
-    //Token过期
-    case 3: {
-      //清除token
-      sessionStorage.removeItem("Token")
-      localStorage.removeItem("Token")
-      break
+  if(code == 0){
+    //成功: 返回响应对象{code: xxx, message: xxx, data: xxx}
+    return response.data
+  }else{
+    //失败
+    //若有消息，弹出提示框
+    if(message){
+      ElMessage({
+        message,
+        type: 'error',
+        duration: 2000,
+      })
     }
-  }
 
-  //返回同一的返回对象
-  if(status == 0) return response.data
-  else return Promise.reject(response.data)
+    return Promise.reject(response.data)
+  }
 }
 
+//失败Response拦截器
 let responseErrorIntercepter = error => {
   console.log("请求失败", error)
   return Promise.reject(error)

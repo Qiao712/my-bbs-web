@@ -59,24 +59,21 @@ export default {
     updateAdvertisement(){
       if(this.selectedImageFile != null){
         //上传图片
-        fileApi.uploadAdvertisementImage(this.selectedImageFile).then(
-          (response)=>{
-            this.selectedImageFile = null
-            let imageFileId = response.data.id
-  
-            //上传广告
-            this.advertisementEdited.imageFileId = imageFileId
-            this.advertisementEdited.createTime = null
-            this.advertisementEdited.updateTime = null
-            this.advertisementEdited.imageUrl = null
-            systemApi.updateAdvertisement(this.advertisementEdited).then(
-              ()=>{
-                ElMessage.success("修改成功")
-                if(this.refresh) this.refresh()
-              }
-            )
-          }
-        )
+        fileApi.uploadFileDirectly(this.selectedImageFile, result=>{
+          this.selectedImageFile = null
+
+          //上传广告
+          this.advertisementEdited.imageFileId = result.fileId
+          this.advertisementEdited.createTime = null
+          this.advertisementEdited.updateTime = null
+          this.advertisementEdited.imageUrl = null
+          systemApi.updateAdvertisement(this.advertisementEdited).then(
+            ()=>{
+              ElMessage.success("修改成功")
+              if(this.refresh) this.refresh()
+            }
+          )
+        })
       }else{
         //未修改图片，上传广告
         this.advertisementEdited.imageFileId = null

@@ -65,7 +65,7 @@ export default {
           // 最多可上传几个文件
           maxNumberOfFiles: 10,
           // 选择文件时的类型限制，默认为 ['image/*']
-          allowedFileTypes: ['image/*'],
+          allowedFileTypes: ["image/jpeg","image/png","image/gif"," image/webp"],
           // 将 meta 拼接到 url 参数中
           metaWithUrl: false,
           // 跨域是否传递 cookie ，默认为 false
@@ -80,12 +80,9 @@ export default {
 
           // 上传
           async customUpload(file, insertFn){
-            fileApi.uploadPostImage(file).then(
-              (response)=>{
-                let url = response.data.url
-                insertFn(url, "", "")
-              }
-            )
+            fileApi.uploadFileDirectly(file, (result)=>{
+              if(result) insertFn(result.url, "", "")
+            })
           }
         }
       }

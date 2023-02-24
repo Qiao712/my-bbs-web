@@ -11,6 +11,7 @@
 import userApi from "./api/userApi"
 import store from "./store"
 import UserNav from "./components/UserNav.vue"
+import { ElMessage } from 'element-plus'
 
 export default {
   name: 'App',
@@ -46,6 +47,19 @@ export default {
         (response)=>{
           store.setCurrentUser(response.data)
           console.info("当前用户:", store.state.currentUser)
+        }
+      ).catch(
+        ()=>{
+          //Token无效: 清除Token
+          if(sessionStorage.getItem("Token") || localStorage.getItem("Token")){
+            sessionStorage.removeItem("Token")
+            localStorage.removeItem("Token")
+            ElMessage({
+              message: "Token失效",
+              type: 'error',
+              duration: 2000,
+            })
+          }
         }
       )
     }

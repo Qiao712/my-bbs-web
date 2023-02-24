@@ -60,28 +60,26 @@ export default {
 			}
 
 			//上传图片后上传广告
-      fileApi.uploadAdvertisementImage(this.selectedImageFile).then(
-				(response)=>{
-					this.advertisement.imageFileId = response.data.id
-					this.selectedImageFile = null
+      fileApi.uploadFileDirectly(this.selectedImageFile, result=>{
+        this.advertisement.imageFileId = result.fileId
+        this.selectedImageFile = null
 
-					//上传广告
-					systemApi.addAdvertisement(this.advertisement).then(
-						()=>{
-							ElMessage.success("添加成功")
-							if(this.refresh) this.refresh()
+        //上传广告
+        systemApi.addAdvertisement(this.advertisement).then(
+          ()=>{
+            ElMessage.success("添加成功")
+            if(this.refresh) this.refresh()
 
-							//清空
-							this.advertisement = {
-								title: "",
-								imageFileId: null,
-								url: "",
-								sequence: "",
-							}
-						}
-					)
-				}
-			)
+            //清空
+            this.advertisement = {
+              title: "",
+              imageFileId: null,
+              url: "",
+              sequence: "",
+            }
+          }
+        )
+      })
     },
 
     selectImage(event){

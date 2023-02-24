@@ -98,19 +98,15 @@ export default {
       let files = event.target.files
       
       if(files && files.length > 0){
-        fileApi.uploadForumLogo(files[0]).then(
-          (response)=>{
-            let fileId = response.data.id
-            
-            forumApi.setForumLogo(this.forum.id, fileId).then(
-              ()=>{
-                this.forum.logoUrl = URL.createObjectURL(files[0])
-                if(this.refresh) this.refresh()
-                ElMessage.success("修改成功")
-              }
-            )
-          }
-        )
+        fileApi.uploadFileDirectly(files[0], (result)=>{
+          forumApi.setForumLogo(this.forum.id, result.fileId).then(
+            ()=>{
+              this.forum.logoUrl = URL.createObjectURL(files[0])
+              if(this.refresh) this.refresh()
+              ElMessage.success("修改成功")
+            }
+          )
+        })
       }
     },
   }
