@@ -6,14 +6,6 @@
         <el-form-item label="上传用户">
           <UserSelecter :callback="(selected)=>{this.queryForm.uploaderId = selected ? selected.id : null}"/>
         </el-form-item>
-        <el-form-item label="上传接口">
-          <el-select v-model="queryForm.source" placeholder="选择上传接口" clearable>
-            <el-option label="用户头像" value="user-avatar" />
-            <el-option label="内容中插图" value="post-image" />
-            <el-option label="论坛Logo" value="forum-logo" />
-            <el-option label="广告图片" value="ad-image" />
-          </el-select>
-        </el-form-item>
 
         <el-form-item label="文件类型">
           <el-input v-model="queryForm.fileType"/>
@@ -30,13 +22,17 @@
       <el-table :data="files">
         <el-table-column prop="uploaderUsername" label="上传者"/>
 
-        <el-table-column prop="source" label="文件上传接口"/>
-
         <el-table-column prop="type" label="文件类型"/>
 
         <el-table-column prop="filepath" label="路径"/>
         
         <el-table-column prop="refCount" label="引用计数"/>
+
+        <el-table-column prop="size" label="文件大小(byte)"/>
+
+        <el-table-column prop="width" label="图片宽度"/>
+
+        <el-table-column prop="height" label="图片高度"/>
 
         <el-table-column prop="createTime" label="创建时间"/>
 
@@ -83,14 +79,12 @@ export default {
       queryForm:{
         fileType: "",
         uploaderId: null,
-        source: "",   //文件上传来源/用途
       },
 
       //查询条件
       query:{
         type: null,
         uploaderId: null,
-        source: null,   //文件上传来源/用途
         pageNo: 1,
         pageSize: 12 
       },
@@ -135,7 +129,6 @@ export default {
     queryFiles(){
       //复制查询参数
       this.query.type = this.queryForm.fileType.trim().length != 0 ? this.queryForm.fileType.trim() : null
-      this.query.source = this.queryForm.source.trim().length != 0 ? this.queryForm.source.trim() : null
       this.query.uploaderId = this.queryForm.uploaderId
 
       this.listFiles()
