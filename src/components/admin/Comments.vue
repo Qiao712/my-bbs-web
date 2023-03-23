@@ -17,8 +17,8 @@
     <div class="main">
       <el-table :data="comments">
         <el-table-column prop="postTitle" label="贴子标题"/>
-        <el-table-column prop="forum" label="板块"/>
-        <el-table-column prop="authorUsername" label="评论者"/>
+        <el-table-column prop="forumName" label="板块"/>
+        <el-table-column prop="author.username" label="评论者"/>
         <el-table-column prop="content" label="内容"/>
         <el-table-column prop="repliedUserName" label="回复"/>
         <el-table-column prop="likeCount" label="点赞数"/>

@@ -4,19 +4,19 @@
       <UserInfo :user="post.author"/>
     </div>
 
-    <div class="post-content">
+    <div class="first-layer">
       <!--贴子内容-->
-      <div class="editor-content-view" v-html="cleanPostContent">
+      <div class="editor-content-view post-content" v-html="cleanPostContent">
       </div>
 
       <!--按钮条-->
       <div class="bottom-bar">
-        <el-button link type="info" @click="likePost" v-if="!liked">赞 {{likeCount}}</el-button>
-        <el-button link type="primary" @click="undoLikePost" v-if="liked">已赞 {{likeCount}}</el-button>
+        <el-button link type="info" @click="likePost" v-if="!liked">赞👍 {{likeCount}}</el-button>
+        <el-button link type="primary" @click="undoLikePost" v-if="liked">已赞👍 {{likeCount}}</el-button>
 
         <span class="small-text">1楼</span>
-        <span class="small-text">{{post.createTime}}</span>
-        
+        <span class="small-text">发布时间: {{post.createTime}}</span>
+        <span class="small-text">浏览量: {{post.viewCount}}</span>
         <el-button link @click="removePost">删除</el-button>
       </div>
     </div>
@@ -101,10 +101,15 @@ export default {
   text-align: center;
 }
   
-.post-content{
+.first-layer{
   color: var(--el-text-color-regular);
   min-height: 150px;
   margin: 10px;
+}
+
+.post-content{
+  word-break: break-all;
+  white-space: pre-wrap;
 }
 
 .small-text{

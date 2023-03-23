@@ -4,7 +4,7 @@
   <div class="comment-preview" v-for="comment in comments" :key="comment.id">
     <div>
       在 
-      <router-link :to="'/forum/'+ comment.forumId">{{comment.forum}}</router-link>
+      <router-link :to="'/forum/'+ comment.forumId">{{comment.forumName}}</router-link>
       : 
       <router-link :to="'/post/'+ comment.postId">{{comment.postTitle}}</router-link>
       中
@@ -16,14 +16,16 @@
     </div>
     
     <div class="bottom-bar">
+      赞:{{comment.likeCount}}
+
+      发布于:{{comment.createTime}} 
+
       <!--删除按钮， 气泡确认框-->
       <el-popconfirm title="是否删除?" @confirm="deleteComment(comment.id)" confirm-button-text="确认" cancel-button-text="取消">
         <template #reference>
-          <span style="color: grey">删除</span>
+          <span style="color: grey; margin: 5px">删除</span>
         </template>
       </el-popconfirm>
-      
-      发布于: {{comment.createTime}}
     </div>
   </div>
 

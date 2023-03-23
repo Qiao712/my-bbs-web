@@ -2,7 +2,7 @@
   <div v-if="post">
     <div class="user-bar">
       <img class="big-avatar" v-if="post.author.avatarUrl" :src="post.author.avatarUrl"/>
-      <img class="big-avatar" v-if="! post.author.avatarUrl" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"/>
+      <img class="big-avatar" v-if="! post.author.avatarUrl" src="../../assets/default-avatar.png"/>
       <p class="mid-text">{{post.author.username}} : </p>
 
       <div v-if="!highlight" class="mid-text">{{post.title}} </div>
@@ -10,9 +10,9 @@
     </div>
 
     <div>
-      <!--显示提取的Text-->
+      <!---用于显示预览效果-->
       <span v-if="!highlight" class="small-text">
-        {{contentText}}
+        {{post.preview}}
       </span>
       
       <!--允许使用标签,以显示高亮,用于展示搜索结果-->
@@ -20,15 +20,16 @@
       </span>
     </div>
 
-    <div class="time-text">
-      {{post.likeCount}}👍 {{post.commentCount}}条评论 {{post.createTime}}
+    <div class="statistic-text">
+      <span v-if="post.likeCount != null">赞:{{post.likeCount}}</span> 
+      <span style="margin-left: 10px" v-if="post.commentCount != null">评论:{{post.commentCount}}</span>
+      <span style="margin-left: 10px" v-if="post.viewCount != null">浏览量: {{post.viewCount}}</span>
+      <span style="margin-left: 10px">{{post.createTime}}</span>
     </div>
   </div>
 </template>
 
 <script>
-import htmlUtil from "../../util/htmlUtil"
-
 export default {
   name: "PostPreview",
   
@@ -36,31 +37,6 @@ export default {
     "post",
     "highlight" //是否启用高亮显示(<em>标签)，用于展示贴子搜索结果
   ],
-
-  data(){
-    return {
-      contentText: ""
-    }
-  },
-
-  created(){
-    this.$watch(
-      () => this.post,
-      () => this.getPostContentPreview(),
-      { immediate: true }
-    )
-  },
-  
-  methods:{
-    getPostContentPreview(){
-      if(! this.post) return
-      this.contentText = htmlUtil.getTextFromHtml(this.post.content)
-      //限制长度
-      if(this.contentText.length > 200){
-        this.contentText = this.contentText.substring(0, 194) + "......";
-      }
-    },
-  }
 }
 </script>
 
@@ -88,10 +64,23 @@ export default {
   word-break: break-word;
 }
 
+.bottom-bar{
+  display:flex;
+  align-items:center;
+}
+
 .time-text{
   font-size: 16px;
   margin: 2px;
+  text-align: left;
+  color:grey;
+}
+
+.statistic-text{
+  font-size: 16px;
+  margin: 2px;
   text-align: right;
+  color:grey;
 }
 </style>
 
