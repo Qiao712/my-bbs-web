@@ -21,9 +21,8 @@
     </div>
 
     <div class="statistic-text">
-      <span v-if="post.likeCount != null">赞:{{post.likeCount}}</span> 
+      <span v-if="post.likeCount != null">赞<span v-if="post.liked" style="color:#66ccff">(已赞)</span>:{{post.likeCount}}</span> 
       <span style="margin-left: 10px" v-if="post.commentCount != null">评论:{{post.commentCount}}</span>
-      <span style="margin-left: 10px" v-if="post.viewCount != null">浏览量: {{post.viewCount}}</span>
       <span style="margin-left: 10px">{{post.createTime}}</span>
     </div>
   </div>

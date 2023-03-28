@@ -9,10 +9,11 @@ export default{
         })
     },
 
-    getUnacknowledgedPrivateMessageCount(){
+    sendPrivateMessage(receiverId, content){
         return request({
-          url: "/chat/messages/count",
-          method: "GET",
+            url: "/chat/messages/" + receiverId,
+            method: "PUT",
+            data: [content]
         })
     },
 
@@ -24,8 +25,10 @@ export default{
         })
     },
 
-    //获取用于握手升级的Uri
-    getChatWebSocketUri(token){
-        return "ws://localhost:8081/api" + "/chat/" + token
-    }
+    getTotalUnreadNumber(){
+        return request({
+          url: "/chat/messages/unread-num",
+          method: "GET",
+        })
+    },
 }

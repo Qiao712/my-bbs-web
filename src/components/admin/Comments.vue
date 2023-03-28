@@ -69,9 +69,9 @@ export default {
 
       query:{
         authorId: null,
-
         pageSize: 10,
-        pageNo: 1
+        pageNo: 1,
+        orderBy: "create_time"
       },
 
       comments: [],

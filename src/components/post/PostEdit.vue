@@ -48,7 +48,7 @@ export default {
   components: { Editor, Toolbar },
   props: [
     "forumId",
-    "refresh" //发帖后，调用一下刷新页面
+    "callback" //发帖后，调用一下刷新页面
   ],
 
   setup(props) {
@@ -133,7 +133,7 @@ export default {
         ()=>{
           post.value.title = ""
           post.value.content = ""
-          if(props.refresh) props.refresh()
+          if(props.callback) props.callback()
           ElMessage.success("发布成功")
         }
       )

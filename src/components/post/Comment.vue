@@ -196,8 +196,11 @@ export default {
 
 .comment-content{
   color: var(--el-text-color-regular);
-  min-height: 60px;
   margin: 10px;
+}
+
+.editor-content-view{
+  min-height: 80px;
 }
 
 .sub-comment-box{

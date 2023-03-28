@@ -29,7 +29,7 @@
       style="background-color: white;"
     />
 
-    <PostEdit :forumId="forumId"/>
+    <PostEdit :forumId="forumId" :callback="listPosts"/>
   </ViewContainer>
 </template>
 

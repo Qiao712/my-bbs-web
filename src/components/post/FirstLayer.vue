@@ -103,13 +103,13 @@ export default {
   
 .first-layer{
   color: var(--el-text-color-regular);
-  min-height: 150px;
   margin: 10px;
 }
 
 .post-content{
   word-break: break-all;
   white-space: pre-wrap;
+  min-height: 130px;
 }
 
 .small-text{

@@ -19,7 +19,7 @@ const store = {
     //刷新未读消息数量
     refreshMessageCount(){
         if(this.state.currentUser){
-            chatApi.getUnacknowledgedPrivateMessageCount().then(
+            chatApi.getTotalUnreadNumber().then(
                 response => this.state.privateMessageCount = response.data
             )
     
