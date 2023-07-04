@@ -38,12 +38,12 @@ export default{
     })
   },
 
-  setUserAvatar(userId, avatarImageFileId){
+  setUserAvatar(userId, avatarUrl){
     return request({
       url: "/users/" + userId + "/avatar",
       method: "PUT",
       params: {
-        fileId: avatarImageFileId
+        avatarUrl
       }
     })
   },

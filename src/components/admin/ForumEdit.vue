@@ -98,11 +98,11 @@ export default {
       let files = event.target.files
       
       if(files && files.length > 0){
-        fileApi.uploadForumLogo(files[0]).then(
+        fileApi.uploadImage(files[0]).then(
           (response)=>{
-            let fileId = response.data.id
+            let url = response.data
             
-            forumApi.setForumLogo(this.forum.id, fileId).then(
+            forumApi.setForumLogo(this.forum.id, url).then(
               ()=>{
                 this.forum.logoUrl = URL.createObjectURL(files[0])
                 if(this.refresh) this.refresh()

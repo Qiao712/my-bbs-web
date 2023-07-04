@@ -1,62 +1,14 @@
 import request from "./request.js"
 
 export default {
-  uploadPostImage(file){
+  uploadImage(file){
     let form = new FormData()
     form.append("file", file)
     
     return request({
-      url: "/files/post-images",
+      url: "/files/",
       method: "POST",
       data: form
-    })
-  },
-
-  uploadUserAvatar(file){
-    let form = new FormData()
-    form.append("file", file)
-    
-    return request({
-      url: "/files/user-avatars",
-      method: "POST",
-      data: form
-    })
-  },
-
-  uploadForumLogo(file){
-    let form = new FormData()
-    form.append("file", file)
-    
-    return request({
-      url: "/files/forum-logos",
-      method: "POST",
-      data: form
-    })
-  },
-
-  uploadAdvertisementImage(file){
-    let form = new FormData()
-    form.append("file", file)
-    
-    return request({
-      url: "/files/advertisement-images",
-      method: "POST",
-      data: form
-    })
-  },
-
-  listFiles(query){
-    return request({
-      url: "/admin/files",
-      method: "GET",
-      params: query
-    })
-  },
-
-  removeFile(fileId){
-    return request({
-      url: "/admin/files/" + fileId,
-      method: "DELETE"
     })
   }
 }

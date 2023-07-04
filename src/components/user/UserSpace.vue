@@ -103,11 +103,11 @@ export default {
       let files = event.target.files
       
       if(files && files.length > 0){
-        fileApi.uploadUserAvatar(files[0]).then(
+        fileApi.uploadImage(files[0]).then(
           (response)=>{
-            let fileId = response.data.id
+            let url = response.data
             
-            userApi.setUserAvatar(this.user.id, fileId).then(
+            userApi.setUserAvatar(this.user.id, url).then(
               ()=>{
                 this.user.avatarUrl = URL.createObjectURL(files[0])
                 ElMessage.success("头像上传成功")

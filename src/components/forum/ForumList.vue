@@ -37,6 +37,7 @@ export default {
 
   methods:{
     listForums(){
+      console.log("reerrere")
       forumApi.listAllForums().then(
         (response)=>{
           this.forums = response.data

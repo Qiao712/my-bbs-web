@@ -6,11 +6,8 @@ import LoginView from "../components/LoginView"
 import Users from "../components/admin/Users"
 import Roles from "../components/admin/Roles"
 import Posts from "../components/admin/Posts"
-import Statistic from "../components/admin/Statistic"
 import Comments from "../components/admin/Comments"
 import Authorities from "../components/admin/Authorities"
-import Advertisements from "../components/admin/Advertisements"
-import Files from "../components/admin/Files"
 import UserEdit from "../components/admin/UserEdit"
 import PostEdit from "../components/post/PostEdit"
 import PostView from "../components/post/PostView"
@@ -49,10 +46,7 @@ let routes = [
       { path: 'forum', component: Forums},
       { path: 'posts', component: Posts},
       { path: 'comments', component: Comments},
-      { path: 'statistic', component: Statistic},
       { path: 'authorities', component: Authorities},
-      { path: 'advertisements', component: Advertisements},
-      { path: 'files', component: Files}
     ]
   },
 
