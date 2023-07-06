@@ -1,7 +1,7 @@
 <template>
   <ViewContainer>
     <div class="search-bar">
-      <el-select v-model="searchParam.forumId" placeholder="选择分类">
+      <el-select v-model="searchParam.categoryId" placeholder="选择分类">
         <el-option v-for="forum in forums" :key="forum.id" :label="forum.name" :value="forum.id" />
       </el-select>
 
@@ -45,7 +45,7 @@ export default {
       searchParam: {
         text: "",
         authorId: null,
-        forumId: null,
+        categoryId: null,
         pageNo: 1,
         pageSize: 10
       },
