@@ -3,7 +3,7 @@
   <div class="container">
     <div class="head">
       <el-form :inline="true">
-        <el-form-item label="评论者">
+        <el-form-item label="发布者">
           <UserSelecter :callback="(selected)=>{this.queryForm.authorId = selected ? selected.id : null}"/>
         </el-form-item>
         
@@ -13,14 +13,12 @@
       </el-form>
     </div>
     
-    <!--板块列表-->
+    <!--分类列表-->
     <div class="main">
       <el-table :data="comments">
-        <el-table-column prop="postTitle" label="贴子标题"/>
-        <el-table-column prop="forum" label="板块"/>
-        <el-table-column prop="authorUsername" label="评论者"/>
+        <el-table-column prop="postTitle" label="问题"/>
+        <el-table-column prop="authorUsername" label="发布者"/>
         <el-table-column prop="content" label="内容"/>
-        <el-table-column prop="repliedUserName" label="回复"/>
         <el-table-column prop="likeCount" label="点赞数"/>
         <el-table-column prop="createTime" label="发布时间"/>
 

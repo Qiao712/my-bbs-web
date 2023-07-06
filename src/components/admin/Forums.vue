@@ -3,7 +3,7 @@
     <!--选项-->
     <div class="head">
       <el-form :inline="true">
-        <el-form-item label="板块名">
+        <el-form-item label="分类名">
           <el-input v-model="queryForm.name"/>
         </el-form-item>
         <el-form-item label="分类">
@@ -13,15 +13,15 @@
         </el-form-item>
         <el-form-item>
           <el-button type="primary" @click="queryForums()">查询</el-button>
-          <el-button type="primary" @click="addForumDialogVisible = true">添加板块</el-button>
+          <el-button type="primary" @click="addForumDialogVisible = true">添加分类</el-button>
         </el-form-item>
       </el-form>
     </div>
     
-    <!--板块列表-->
+    <!--分类列表-->
     <div class="main">
       <el-table :data="forums">
-        <el-table-column prop="name" label="板块名"/>
+        <el-table-column prop="name" label="分类名"/>
         
         <el-table-column label="Logo">
           <template #default="scope">
@@ -56,14 +56,14 @@
     </div>
   </div>
 
-  <el-dialog v-model="addForumDialogVisible" title="添加板块">
+  <el-dialog v-model="addForumDialogVisible" title="添加分类">
     <ForumAdd :refresh="()=>{
       addForumDialogVisible = false
       this.listForums()
     }"/>
   </el-dialog>
 
-  <el-dialog v-model="editForumDialogVisible" title="编辑板块">
+  <el-dialog v-model="editForumDialogVisible" title="编辑分类">
     <ForumEdit 
       :refresh="()=>{
         editForumDialogVisible = false

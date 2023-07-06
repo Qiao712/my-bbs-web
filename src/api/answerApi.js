@@ -17,13 +17,13 @@ export default{
         })
       },
     
-    //   listMyAnswers(params){
-    //     return request({
-    //       url: "/answers/my",
-    //       method: "GET",
-    //       params
-    //     })
-    //   },
+      listMyAnswers(params){
+        return request({
+          url: "/answers/my",
+          method: "GET",
+          params
+        })
+      },
     
       removeMyAnswer(answerId){
         return request({

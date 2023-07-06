@@ -3,14 +3,14 @@ import request from "./request"
 export default{
   getForum(forumId){
     return request({
-      url: "/forums/" + forumId,
+      url: "/categories/" + forumId,
       method: "GET"
     })
   },
 
   listForums(query){
     return request({
-      url: "/forums",
+      url: "/categories",
       method: "GET",
       params: query
     })
@@ -18,7 +18,7 @@ export default{
 
   listAllForums(){
     return request({
-      url: "/forums/all",
+      url: "/categories/all",
       method: "GET"
     })
   },
@@ -27,7 +27,7 @@ export default{
 
   addForum(forum){
     return request({
-      url: "/admin/forums",
+      url: "/admin/categories",
       method: "POST",
       data: forum
     })
@@ -35,14 +35,14 @@ export default{
 
   removeForum(forumId){
     return request({
-      url: "/admin/forums/" + forumId,
+      url: "/admin/categories/" + forumId,
       method: "DELETE",
     })
   },
 
   updateForum(forum){
     return request({
-      url: "/admin/forums",
+      url: "/admin/categories",
       method: "PUT",
       data: forum
     })
@@ -50,14 +50,14 @@ export default{
 
   listCategories(){
     return request({
-      url: "/admin/forums/categories",
+      url: "/admin/categories/categories",
       method: "GET"
     })
   },
 
   setForumLogo(forumId, logoUrl){
     return request({
-      url: "/admin/forums/" + forumId + "/logo",
+      url: "/admin/categories/" + forumId + "/logo",
       method: "PUT",
       params: {
         logoUrl

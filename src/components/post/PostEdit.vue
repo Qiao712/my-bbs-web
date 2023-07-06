@@ -1,5 +1,5 @@
 <template>
-  <!--板块选择 标题 发布选项-->
+  <!--分类选择 标题 发布选项-->
   <div class="title">
     <div>
       <el-form-item label="标题">
@@ -130,7 +130,7 @@ export default {
       content: valueHtml
     })
 
-    //发布贴子
+    //发布问题
     const publishPost = () => {
       postApi.addPost(post.value).then(
         ()=>{

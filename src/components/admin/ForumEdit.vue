@@ -8,7 +8,7 @@
       <input id="imageInput" hidden type="file" @change="uploadAvatar" accept="image/*"/>
     </el-form-item>
 
-    <el-form-item label="板块名">
+    <el-form-item label="分类名">
       <el-input v-model="forum.name"/>
     </el-form-item>
 
@@ -63,7 +63,6 @@ export default {
         this.forum.name = this.originForum.name
         this.forum.category = this.originForum.category
         this.forum.description = this.originForum.description
-        this.forum.logoUrl = this.originForum.logoUrl
       },
       { immediate: true }
     )

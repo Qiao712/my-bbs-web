@@ -21,7 +21,7 @@
     </div>
 
     <div class="time-text">
-      {{post.likeCount}}👍 {{post.commentCount}}条评论 {{post.createTime}}
+      {{post.likeCount}}👍 {{post.commentCount}}条回答 {{post.createTime}}
     </div>
   </div>
 </template>
@@ -34,7 +34,7 @@ export default {
   
   props: [
     "post",
-    "highlight" //是否启用高亮显示(<em>标签)，用于展示贴子搜索结果
+    "highlight" //是否启用高亮显示(<em>标签)，用于展示问题搜索结果
   ],
 
   data(){

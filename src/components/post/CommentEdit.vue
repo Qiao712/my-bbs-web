@@ -33,7 +33,7 @@ import fileApi from "../../api/fileApi"
 export default {
   components: { Editor, Toolbar },
   props: [
-    "post",         //被回复的贴子
+    "post",         //被回复的问题
     "listComments"  //用于刷新回复列表
   ],  
   setup(props) {
@@ -103,7 +103,7 @@ export default {
       editorRef.value = editor
     }
 
-    //评论
+    //回答
     const publishComment = () => {
       let answer = {
         questionId: props.post.id,

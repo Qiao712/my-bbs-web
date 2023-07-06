@@ -1,28 +1,23 @@
 <template>
-  <el-empty description="无评论" v-if="!comments || comments.length == 0"/>
+  <el-empty description="无回答" v-if="!comments || comments.length == 0"/>
 
   <div class="comment-preview" v-for="comment in comments" :key="comment.id">
-    <div>
-      在 
-      <router-link :to="'/forum/'+ comment.forumId">{{comment.forum}}</router-link>
-      : 
-      <router-link :to="'/post/'+ comment.postId">{{comment.postTitle}}</router-link>
-      中
-      <span v-if="comment.repliedUserName">回复 <router-link :to="'/user'">{{comment.repliedUserName}}</router-link></span>
-    </div>
-    
     <div class="comment-preview-content">
       {{comment.content}}
     </div>
     
     <div class="bottom-bar">
+      <router-link :to="'/post/'+ comment.questionId">跳转到问题</router-link>
+
+      <div style="width: 5px"></div>
+
       <!--删除按钮， 气泡确认框-->
       <el-popconfirm title="是否删除?" @confirm="deleteComment(comment.id)" confirm-button-text="确认" cancel-button-text="取消">
         <template #reference>
           <span style="color: grey">删除</span>
         </template>
       </el-popconfirm>
-      
+
       发布于: {{comment.createTime}}
     </div>
   </div>
@@ -40,7 +35,7 @@
 
 <script>
 import { ElMessage } from 'element-plus/lib/components'
-import commentApi from "../../api/commentApi"
+import answerApi from "../../api/answerApi"
 import htmlUtil from "../../util/htmlUtil"
 
 export default {
@@ -70,7 +65,7 @@ export default {
         pageSize: this.pageSize,
       }
 
-      commentApi.listMyComments(params).then(
+      answerApi.listMyAnswers(params).then(
         response=>{
           this.pageNo = response.data.current
           this.comments = response.data.records
@@ -89,7 +84,7 @@ export default {
     },
 
     deleteComment(commentId){
-      commentApi.deleteComment(commentId).then(
+      answerApi.deleteAnswer(commentId).then(
         ()=>{
           this.getCommentsByAuthor()
           ElMessage.success("删除成功")

@@ -5,7 +5,7 @@
     </div>
 
     <div class="post-content">
-      <!--贴子内容-->
+      <!--问题内容-->
       <div class="editor-content-view" v-html="cleanPostContent">
       </div>
 

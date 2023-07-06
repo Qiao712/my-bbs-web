@@ -5,7 +5,7 @@
     </div> 
 
     <!--搜索框-->
-    <el-input class="search-bar" v-model="searchText" placeholder="搜索贴子..." @keypress.enter="searchPosts()"/>
+    <el-input class="search-bar" v-model="searchText" placeholder="搜索问题..." @keypress.enter="searchPosts()"/>
 
     <div class="flex-grow"/>
 

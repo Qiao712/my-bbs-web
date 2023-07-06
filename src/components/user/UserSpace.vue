@@ -23,11 +23,8 @@
 
       <!--功能选择菜单-->
       <el-tabs v-model="activeName" v-if="user.id">
-        <el-tab-pane label="我的贴子" name="1"><PostsOfUser v-if="user.username" :username="user.username"/></el-tab-pane>
-
-        <el-tab-pane label="我的评论" name="2" v-if="currentUser.id == user.id"><CommentsOfUser v-if="user.username" :username="user.username"/></el-tab-pane> <!--不为其他用户展示-->
-        <el-tab-pane label="收藏" name="3" v-if="currentUser.id == user.id"><FavoriteList :userId="user.id"/></el-tab-pane>  <!--不为其他用户展示-->
-        <el-tab-pane label="关注" name="4" v-if="currentUser.id == user.id"><FollowingList :userId="user.id"/></el-tab-pane> <!--不为其他用户展示-->
+        <el-tab-pane label="我的问题" name="1"><PostsOfUser v-if="user.username" :username="user.username"/></el-tab-pane>
+        <el-tab-pane label="我的回答" name="2" v-if="currentUser.id == user.id"><CommentsOfUser v-if="user.username" :username="user.username"/></el-tab-pane> <!--不为其他用户展示-->
       </el-tabs>
     </el-col>
   </el-row>
@@ -39,18 +36,14 @@ import userApi from "../../api/userApi"
 import fileApi from "../../api/fileApi"
 
 import PostsOfUser from "./PostsOfUser.vue"
-import FavoriteList from "./FavoriteList.vue"
 import CommentsOfUser from "./CommentsOfUser.vue"
-import FollowingList from "./FollowingList.vue"
 
 export default {
   name: 'UserSpace',
 
   components:{
     PostsOfUser,
-    FavoriteList,
-    CommentsOfUser,
-    FollowingList
+    CommentsOfUser
   },
 
   data(){

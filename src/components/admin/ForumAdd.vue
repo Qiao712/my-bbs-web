@@ -1,6 +1,6 @@
 <template>
   <el-form label-width="100px">
-    <el-form-item label="板块名">
+    <el-form-item label="分类名">
       <el-input v-model="forum.name"/>
     </el-form-item>
 

@@ -3,8 +3,8 @@
     <div class="mid-text">
       <span style="color: blue">{{message.content.authorUsername}}</span>
       在 
-      <router-link :to="'/post/' + message.content.postId">{{message.content.postTitle}}</router-link>
-      中回复了你:
+      <router-link :to="'/post/' + message.content.questionId">{{message.content.questionTitle}}</router-link>
+      中回答了你:
       <span>{{comment}}</span>
     </div>
     <div class="time-text">{{message.createTime}}</div>

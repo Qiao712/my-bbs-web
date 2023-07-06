@@ -3,11 +3,11 @@
   <div class="container">
     <div class="head">
       <el-form :inline="true">
-        <!-- <el-form-item label="贴子标题">
+        <!-- <el-form-item label="问题标题">
           <el-input v-model="queryForm.title"/>
         </el-form-item> -->
-        <el-form-item label="板块">
-          <el-select v-model="queryForm.forumId" placeholder="选择板块" clearable>
+        <el-form-item label="分类">
+          <el-select v-model="queryForm.forumId" placeholder="选择分类" clearable>
             <el-option v-for="forum in forums" :key="forum.id" :label="forum.name" :value="forum.id" />
           </el-select>
         </el-form-item>
@@ -22,14 +22,14 @@
       </el-form>
     </div>
     
-    <!--板块列表-->
+    <!--分类列表-->
     <div class="main">
       <el-table :data="posts">
         <el-table-column prop="title" label="标题"/>
         <el-table-column prop="author.username" label="发布者"/>
-        <el-table-column prop="forumName" label="板块"/>
+        <el-table-column prop="categoryName" label="分类"/>
         <el-table-column prop="content" label="内容"/>
-        <el-table-column prop="commentCount" label="评论数"/>
+        <el-table-column prop="commentCount" label="回答数"/>
         <el-table-column prop="likeCount" label="点赞数"/>
         <el-table-column prop="createTime" label="发布时间"/>
 

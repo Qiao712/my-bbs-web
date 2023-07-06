@@ -25,7 +25,7 @@ export default {
     return {
       forums: [],
 
-      //按分类分组的板块列表
+      //按分类分组的分类列表
       groupedForum: {}
     }
   },

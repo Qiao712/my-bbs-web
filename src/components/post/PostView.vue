@@ -2,7 +2,7 @@
   <ViewContainer>
     <p v-if="post" id="post-title">{{post.title}}</p>
     
-    <!--一楼(贴子内容)-->
+    <!--一楼(问题内容)-->
     <div class="reply-col" v-if="pageNo == 1">
       <FirstLayer v-if="post" :post="post"></FirstLayer>
     </div>
@@ -78,7 +78,7 @@ export default {
       }
     },
 
-    //一级评论即答案
+    //一级回答即答案
     listComments(){
       let params = {
         pageNo: this.pageNo,
