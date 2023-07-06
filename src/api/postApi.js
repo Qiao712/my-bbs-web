@@ -3,7 +3,7 @@ import request from "./request"
 export default{
   addPost(post){
     return request({
-      url: "/posts",
+      url: "/questions",
       method: "POST",
       data: post
     })
@@ -11,14 +11,14 @@ export default{
 
   getPost(postId){
     return request({
-      url: "/posts/" + postId,
+      url: "/questions/" + postId,
       method: "GET"
     })
   },
 
   listPosts(params){
     return request({
-      url: "/posts",
+      url: "/questions",
       method: "GET",
       params
     })
@@ -26,7 +26,7 @@ export default{
 
   searchPosts(params){
     return request({
-      url: "/posts/search",
+      url: "/questions/search",
       method: "GET",
       params
     })
@@ -34,21 +34,21 @@ export default{
 
   removeMyPost(postId){
     return request({
-      url: "/posts/" + postId,
+      url: "/questions/" + postId,
       method: "DELETE"
     })
   },
 
   likePost(postId){
     return request({
-      url: "/posts/" + postId + "/like",
+      url: "/questions/" + postId + "/like",
       method: "GET"
     })
   },
 
   undoLikePost(postId){
     return request({
-      url: "/posts/" + postId + "/undo-like",
+      url: "/questions/" + postId + "/undo-like",
       method: "GET"
     })
   },
@@ -57,7 +57,7 @@ export default{
 
   removePost(postId){
     return request({
-      url: "/admin/posts/" + postId,
+      url: "/admin/questions/" + postId,
       method: "DELETE"
     })
   },

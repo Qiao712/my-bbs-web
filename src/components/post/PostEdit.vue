@@ -126,7 +126,7 @@ export default {
 
     const post = ref({
       title: "",
-      forumId: props.forumId,
+      categoryId: props.forumId,
       content: valueHtml
     })
 

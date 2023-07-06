@@ -47,6 +47,7 @@
 
 <script>
 import commentApi from "../../api/commentApi"
+import answerApi from "../../api/answerApi"
 import SubComment from "./SubComment"
 import UserInfo from './UserInfo.vue'
 import { ElMessage } from 'element-plus'
@@ -104,8 +105,7 @@ export default {
       let params = {
         pageNo: this.pageNo,
         pageSize: this.pageSize,
-        postId: this.comment.postId,
-        parentCommentId: this.comment.id
+        answerId: this.comment.id,
       }
       commentApi.listComments(params).then(
         (response)=>{
@@ -129,8 +129,8 @@ export default {
 
     reply(){
       let comment = {
-        postId: this.comment.postId,
-        repliedId: this.comment.id,
+        answerId: this.comment.id,
+        repliedId: null,
         content: this.replyContent
       }
 
@@ -145,7 +145,7 @@ export default {
     },
 
     deleteComment(){
-      commentApi.removeMyComment(this.comment.id).then(
+      answerApi.removeMyAnswer(this.comment.id).then(
         ()=>{
           ElMessage.success("删除成功")
           if(this.refresh) this.refresh()
@@ -154,7 +154,7 @@ export default {
     },
 
     likeComment(){
-      commentApi.likeComment(this.comment.id).then(
+      answerApi.likeAnswer(this.comment.id).then(
         ()=>{
           this.liked = true
           this.likeCount++
@@ -164,7 +164,7 @@ export default {
     },
 
     undoLikeComment(){
-      commentApi.undoLikeComment(this.comment.id).then(
+      answerApi.undoLikeAnswer(this.comment.id).then(
         ()=>{
           this.liked = false
           this.likeCount--

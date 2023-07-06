@@ -7,7 +7,7 @@
         <img class="avatar" v-if="conversation.avatarUrl" :src="conversation.avatarUrl"/>
         <img class="avatar" v-if="! conversation.avatarUrl" src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png"/>
         <p class="mid-text">{{conversation.username}} : </p>
-        <el-tag v-if="conversation.unacknowledgedCount!=0">未读: {{conversation.unacknowledgedCount}}</el-tag>
+        <el-tag v-if="conversation.unreadNum!=0">{{conversation.unreadNum}}</el-tag>
       </div>
 
       <div class="mid-text">{{conversation.latestMessage.content}}</div>
@@ -29,6 +29,7 @@
 <script>
 import chatApi from "../../api/chatApi"
 import ViewContainer from "../common/ViewContainer.vue"
+import store from "../../store"
 
 export default {
   name: "ConversationListView",
@@ -66,6 +67,7 @@ export default {
 
     chat(userId){
       this.$router.push({path: "/chat/" + userId})
+      store.refreshMessageCount()
     },
 
     handlePageChange(pageNo){

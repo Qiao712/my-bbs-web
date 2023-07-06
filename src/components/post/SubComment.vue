@@ -21,7 +21,7 @@
       <div class="sub-comment-content">
         <span class="small-text">
           {{comment.author.username}}
-          <span v-if="comment.repliedId != comment.parentId">回复 <span style="color: pink">{{comment.repliedUserName}}</span></span>:
+          <span v-if="comment.repliedId != null">回复 <span style="color: pink">{{comment.repliedUserName}}</span></span>:
           {{comment.content}}
         </span>
       </div>
@@ -72,10 +72,9 @@ export default {
   },
 
   methods:{
-    //回复一个一级评论
     reply(){
       let comment = {
-        postId: this.comment.postId,
+        answerId: this.comment.answerId,
         repliedId: this.comment.id,
         content: this.replyContent
       }

@@ -27,7 +27,7 @@ import { onBeforeUnmount, ref, shallowRef } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { ElMessage } from 'element-plus'
 
-import commentApi from "../../api/commentApi"
+import answerId from "../../api/answerApi"
 import fileApi from "../../api/fileApi"
 
 export default {
@@ -105,12 +105,12 @@ export default {
 
     //评论
     const publishComment = () => {
-      let comment = {
-        postId: props.post.id,
+      let answer = {
+        questionId: props.post.id,
         content: valueHtml.value
       }
 
-      commentApi.addComment(comment).then(
+      answerId.addAnswer(answer).then(
         ()=>{
           valueHtml.value = ""
           ElMessage.success("发布成功")

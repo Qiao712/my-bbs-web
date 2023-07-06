@@ -37,7 +37,7 @@ import FirstLayer from "./FirstLayer"
 import CommentEdit from "./CommentEdit"
 import Comment from "./Comment"
 import postApi from "../../api/postApi"
-import commentApi from "../../api/commentApi"
+import answerApi from "../../api/answerApi"
 import ViewContainer from "../common/ViewContainer.vue"
 
 export default {
@@ -78,14 +78,15 @@ export default {
       }
     },
 
+    //一级评论即答案
     listComments(){
       let params = {
         pageNo: this.pageNo,
         pageSize: this.pageSize,
-        postId: this.postId
+        questionId: this.postId
       }
 
-      commentApi.listComments(params).then(
+      answerApi.listAnswers(params).then(
         (response)=>{
           this.pageNo = response.data.current
           this.comments = response.data.records
