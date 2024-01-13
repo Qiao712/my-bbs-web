@@ -1,17 +1,23 @@
 <template>
   <div v-if="visible" class="user-nav">
     <div @click="$router.push({path: '/'})">
-      <img class="logo" src="../assets/logo.png"/>
+      <!-- <img class="logo" src="../assets/logo.png"/> -->
+      <el-text style="margin: 5px" size="large"> Question & Answer </el-text>
     </div> 
 
     <!--搜索框-->
-    <el-input class="search-bar" v-model="searchText" placeholder="搜索问题..." @keypress.enter="searchPosts()"/>
+    <el-input class="search-bar" v-model="searchText" placeholder="搜索问题..." @keypress.enter="searchPosts"/>
+    <el-button @click="searchPosts">搜索</el-button>
+    <el-button @click="addPost">发布问题</el-button>
+
+    <!--发布-->
 
     <div class="flex-grow"/>
 
     <!--靠右一栏-->
     <div>
       <div v-if="state.currentUser" class="user-info">
+
         <!--用户私信-->
         <el-badge :value="state.privateMessageCount" :hidden="state.privateMessageCount==0" style="margin-right: 20px">
           <Message @click="$router.push({path: '/conversations'})" style="width: 30px; height: 30px;"/>
@@ -62,7 +68,7 @@ export default {
 
   components:{
     Message,
-    Bell
+    Bell,
   },
 
   data(){
@@ -94,6 +100,10 @@ export default {
     searchPosts(){
       if(this.searchText.trim().length != 0)
         this.$router.push({path: "/post/search", query:{text: this.searchText}})
+    },
+
+    addPost(){
+      this.$router.push({path: "/post/edit"})
     },
 
     getMessageCount(){

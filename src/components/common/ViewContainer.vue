@@ -1,6 +1,6 @@
 <template>
   <el-row justify="center">
-    <el-col :xs="24" :sm="24" :md="20" :lg="14" :xl="12">
+    <el-col :xs="30" :sm="30" :md="26" :lg="20" :xl="18">
       <slot></slot>
     </el-col>
   </el-row>

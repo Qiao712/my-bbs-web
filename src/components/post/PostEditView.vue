@@ -1,36 +1,43 @@
 <template>
-  <!--分类选择 标题 发布选项-->
-  <div class="title">
-    <div>
-      <el-form-item label="标题">
-        <el-input v-model="post.title" placeholder="请输入标题"/>
-      </el-form-item>
-    </div>
+  <view-container>
 
-    <div></div>
+    <!--标题输入 和 发布按钮-->
+    <div class="title">
+      <div>
+        <el-form-item label="标题">
+          <el-input v-model="post.title" placeholder="请输入标题"/>
+        </el-form-item>
+      </div>
 
-    <div>
-      <el-form-item>
+      <div></div>
+
+      <div>
         <el-button type="primary" @click="publishPost()">发布</el-button>
-      </el-form-item>
+      </div>
     </div>
-  </div>
 
-  <div style="border: 1px solid #ccc">
-    <Toolbar
-      style="border-bottom: 1px solid #ccc"
-      :editor="editorRef"
-      :defaultConfig="toolbarConfig"
-      :mode="mode"
-    />
-    <Editor
-      style="height: 500px; overflow-y: hidden;"
-      v-model="valueHtml"
-      :defaultConfig="editorConfig"
-      :mode="mode"
-      @onCreated="handleCreated"
-    />
-  </div>
+    <!-- 标签展示-->
+    <el-form-item label="标签">
+      <tag-editor :tags="post.tags" :tagUpdate="handleTagUpdate"/>
+    </el-form-item>
+
+    <!--编辑器-->
+    <div style="border: 1px solid #ccc">
+      <Toolbar
+        style="border-bottom: 1px solid #ccc"
+        :editor="editorRef"
+        :defaultConfig="toolbarConfig"
+        :mode="mode"
+      />
+      <Editor
+        style="height: 500px; overflow-y: hidden;"
+        v-model="valueHtml"
+        :defaultConfig="editorConfig"
+        :mode="mode"
+        @onCreated="handleCreated"
+      />
+    </div>
+  </view-container>
 </template>
 
 <script>
@@ -40,16 +47,14 @@ import { onBeforeUnmount, ref, shallowRef } from 'vue'
 import { Editor, Toolbar } from '@wangeditor/editor-for-vue'
 import { ElMessage } from 'element-plus'
 
+import ViewContainer from '../common/ViewContainer.vue'
+import TagEditor from '../common/TagEditor.vue'
 import postApi from "../../api/postApi"
 import fileApi from "../../api/fileApi"
 
 export default {
-  name: "PostEdit",
-  components: { Editor, Toolbar },
-  props: [
-    "forumId",
-    "refresh" //发帖后，调用一下刷新页面
-  ],
+  name: "PostEditView",
+  components: { Editor, Toolbar, ViewContainer, TagEditor },
 
   setup(props) {
     // 编辑器实例，必须用shallowRef
@@ -126,8 +131,8 @@ export default {
 
     const post = ref({
       title: "",
-      categoryId: props.forumId,
-      content: valueHtml
+      content: valueHtml,
+      tags: [],
     })
 
     //发布问题
@@ -142,6 +147,11 @@ export default {
       )
     }
 
+    //接收标签编辑器的改变
+    const handleTagUpdate = (tags)=>{
+      post.value.tags = tags
+    }
+
     return {
       editorRef,
       valueHtml,
@@ -151,7 +161,8 @@ export default {
       handleCreated,
 
       post,
-      publishPost
+      publishPost,
+      handleTagUpdate,
     };
   }
 }
@@ -161,5 +172,6 @@ export default {
 .title{
   display: grid;
   grid-template-columns: 85% 5% 10%;
+  margin-top: 10px;
 }
 </style>

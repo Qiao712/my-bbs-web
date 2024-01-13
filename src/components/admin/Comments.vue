@@ -16,8 +16,8 @@
     <!--分类列表-->
     <div class="main">
       <el-table :data="comments">
-        <el-table-column prop="postTitle" label="问题"/>
-        <el-table-column prop="authorUsername" label="发布者"/>
+        <el-table-column prop="questionId" label="问题"/>
+        <el-table-column prop="author.username" label="发布者"/>
         <el-table-column prop="content" label="内容"/>
         <el-table-column prop="likeCount" label="点赞数"/>
         <el-table-column prop="createTime" label="发布时间"/>
@@ -46,7 +46,7 @@
 
 <script>
 import { ElMessage } from 'element-plus/lib/components'
-import commentApi from "../../api/commentApi"
+import answerApi from "../../api/answerApi"
 import htmlUtil from "../../util/htmlUtil"
 import UserSelecter from "./UserSelecter.vue"
 
@@ -83,7 +83,7 @@ export default {
 
   methods:{
     listComments(){
-      commentApi.listCommentDetails(this.query).then(
+      answerApi.listAnswers(this.query).then(
         (response) => {
           this.comments = response.data.records
           this.query.pageNo = response.data.current
@@ -103,7 +103,7 @@ export default {
     },
 
     removeComment(index){
-      commentApi.deleteComment(this.comments[index].id).then(
+      answerApi.deleteAnswer(this.comments[index].id).then(
         ()=>{
           this.listComments()
           ElMessage.success("删除成功")

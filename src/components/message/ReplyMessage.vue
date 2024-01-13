@@ -5,7 +5,7 @@
       在 
       <router-link :to="'/post/' + message.content.questionId">{{message.content.questionTitle}}</router-link>
       中回答了你:
-      <span>{{comment}}</span>
+      <span>{{message.content.answer}}</span>
     </div>
     <div class="time-text">{{message.createTime}}</div>
   </div>

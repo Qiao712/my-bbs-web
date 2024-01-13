@@ -5,6 +5,8 @@
     </div>
 
     <div class="post-content">
+      <p v-if="post" id="post-title">{{post.title}}</p>
+
       <!--问题内容-->
       <div class="editor-content-view" v-html="cleanPostContent">
       </div>
@@ -115,5 +117,12 @@ export default {
 .bottom-bar{
   display: flex;
   justify-content: flex-end;
+}
+
+#post-title {
+  color: #000000;
+  font-size: 25px;
+  margin: 10px 0;
+  justify-content: flex-start;
 }
 </style>

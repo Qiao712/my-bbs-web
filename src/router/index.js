@@ -9,9 +9,8 @@ import Posts from "../components/admin/Posts"
 import Comments from "../components/admin/Comments"
 import Authorities from "../components/admin/Authorities"
 import UserEdit from "../components/admin/UserEdit"
-import PostEdit from "../components/post/PostEdit"
+import PostEditView from "../components/post/PostEditView"
 import PostView from "../components/post/PostView"
-import ForumView from "../components/forum/ForumView"
 import Forums from "../components/admin/Forums"
 import UserSpace from "../components/user/UserSpace"
 import PostSearchView from "../components/post/PostSearchView"
@@ -26,8 +25,7 @@ let routes = [
   { path: '/', component: IndexView},
   { path: '/login', component: LoginView},
   { path: '/register', component: RegisterView},
-  { path: '/forum/:forumId', component: ForumView},
-  { path: '/post/edit', component: PostEdit},
+  { path: '/post/edit', component: PostEditView},
   { path: '/post/:postId', component: PostView},
   { path: '/post/search', component: PostSearchView},
   { path: '/chat/:userId', component: ConversationView},

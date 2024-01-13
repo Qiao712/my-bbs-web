@@ -20,8 +20,16 @@
       </span>
     </div>
 
-    <div class="time-text">
-      {{post.likeCount}}👍 {{post.commentCount}}条回答 {{post.createTime}}
+    <div class="bottom-bar">
+      <!--标签-->
+      <div class="tag-line">
+        <el-tag style="margin: 3px" v-for="tag in post.tags" :key="tag.id">{{tag.name}}</el-tag>
+      </div>
+
+      <!--信息-->
+      <div class="info-text">
+        {{post.likeCount}}👍 {{post.answerCount}}条回答 {{post.createTime}}
+      </div>
     </div>
   </div>
 </template>
@@ -88,7 +96,12 @@ export default {
   word-break: break-word;
 }
 
-.time-text{
+.bottom-bar{
+  display: flex; 
+  justify-content: space-between; /* 使子元素等距分布 */  
+}
+
+.info-text{
   font-size: 16px;
   margin: 2px;
   text-align: right;

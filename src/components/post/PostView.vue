@@ -1,7 +1,5 @@
 <template>
   <ViewContainer>
-    <p v-if="post" id="post-title">{{post.title}}</p>
-    
     <!--一楼(问题内容)-->
     <div class="reply-col" v-if="pageNo == 1">
       <FirstLayer v-if="post" :post="post"></FirstLayer>
@@ -111,13 +109,6 @@ export default {
 
 <style scoped>
 @import "../../assets/css/edit-content.css";
-#post-title {
-  color: var(--el-text-color-regular);
-  font-size: 20px;
-  margin: 10px 0;
-  justify-content: flex-start;
-}
-
 #post-content{
   border: 1px solid var(--el-border-color);
   border-radius: 2px;
